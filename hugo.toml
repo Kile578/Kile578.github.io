@@ -1,0 +1,4 @@
+baseURL = 'https://Kile578.github.io'
+languageCode = 'en-us'
+title = 'My Cybersecurity Blog'
+theme = 'ananke'
