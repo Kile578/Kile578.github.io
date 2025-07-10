@@ -2,11 +2,7 @@
 date = '2025-07-08T21:41:55-07:00'
 draft = false
 title = 'My Cybersecurity Learning Journey'
-+++
-+++
-date = '2025-07-08T21:41:55-07:00'
-draft = false
-title = 'My Cybersecurity Learning Journey'
+summary = "Join me as I document my journey from Computer Engineering graduate to cybersecurity professional. Learn about my motivations, goals, and what you can expect from this blog."
 +++
 
 ## Welcome to My Cybersecurity Journey

@@ -13,7 +13,28 @@
       <link>http://localhost:1313/posts/my-cybersecurity-learning-journey/</link>
       <pubDate>Tue, 08 Jul 2025 21:41:55 -0700</pubDate>
       <guid>http://localhost:1313/posts/my-cybersecurity-learning-journey/</guid>
-      <description>&lt;p&gt;Welcome to my journey&lt;/p&gt;</description>
+      <description>Join me as I document my journey from Computer Engineering graduate to cybersecurity professional. Learn about my motivations, goals, and what you can expect from this blog.</description>
+    </item>
+    <item>
+      <title>About Me</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;h2 id=&#34;about-kile&#34;&gt;About Kile&lt;/h2&gt;&#xA;&lt;p&gt;Hey there! I&amp;rsquo;m Kile, a 22-year-old Computer Engineering graduate from Northern Arizona University who&amp;rsquo;s passionate about cybersecurity.&lt;/p&gt;&#xA;&lt;h3 id=&#34;my-background&#34;&gt;My Background&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Education:&lt;/strong&gt; Computer Engineering degree from NAU (2025)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Current Focus:&lt;/strong&gt; Diving deep into cybersecurity and information security&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Interests:&lt;/strong&gt; Ethical hacking, digital forensics, network security, and emerging cyber threats&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;why-cybersecurity&#34;&gt;Why Cybersecurity?&lt;/h3&gt;&#xA;&lt;p&gt;My journey into cybersecurity started with a conversation with my grandfather and uncle about the future of technology. They emphasized the importance of developing 21st-century skills, and after exploring various tech fields, I discovered that cybersecurity perfectly combines my love for problem-solving with the mathematical precision I prefer over pure coding.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Contact</title>
+      <link>http://localhost:1313/contact/</link>
+      <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/contact/</guid>
+      <description>&lt;h2 id=&#34;get-in-touch&#34;&gt;Get In Touch&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;d love to connect with fellow cybersecurity enthusiasts, students, professionals, and anyone interested in information security!&lt;/p&gt;&#xA;&lt;h3 id=&#34;why-reach-out&#34;&gt;Why Reach Out?&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Networking:&lt;/strong&gt; Connect with others in the cybersecurity field&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Collaboration:&lt;/strong&gt; Discuss potential projects or study partnerships&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Mentorship:&lt;/strong&gt; Both seeking and offering guidance on cybersecurity careers&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Feedback:&lt;/strong&gt; Share thoughts on my blog posts or suggest topics&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Questions:&lt;/strong&gt; Ask about my journey or specific experiences&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;best-ways-to-connect&#34;&gt;Best Ways to Connect&lt;/h3&gt;&#xA;&lt;h4 id=&#34;professional-networking&#34;&gt;Professional Networking&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;LinkedIn:&lt;/strong&gt; [www.linkedin.com/in/kile-driscoll] - Best for professional connections and career discussions&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;technical-discussions&#34;&gt;Technical Discussions&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;GitHub:&lt;/strong&gt; &lt;a href=&#34;https://github.com/Kile578&#34;&gt;Kile578&lt;/a&gt; - Check out my code and projects&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Email:&lt;/strong&gt; [driscollkile@gmail.com] - For detailed discussions or collaboration inquiries&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;community-engagement&#34;&gt;Community Engagement&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Blog Comments:&lt;/strong&gt; Feel free to comment on any of my posts&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Social Media:&lt;/strong&gt; [Your preferred platforms]&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;response-time&#34;&gt;Response Time&lt;/h3&gt;&#xA;&lt;p&gt;I typically respond to messages within 24-48 hours. For urgent matters, LinkedIn is usually the fastest way to reach me.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Projects</title>
+      <link>http://localhost:1313/projects/</link>
+      <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/</guid>
+      <description>&lt;h2 id=&#34;my-cybersecurity-projects&#34;&gt;My Cybersecurity Projects&lt;/h2&gt;&#xA;&lt;p&gt;Welcome to my project showcase! Here you&amp;rsquo;ll find labs, experiments, and hands-on work as I develop my cybersecurity skills.&lt;/p&gt;&#xA;&lt;h3 id=&#34;current-projects&#34;&gt;Current Projects&lt;/h3&gt;&#xA;&lt;h4 id=&#34;this-blog---hugo--github-pages&#34;&gt;This Blog - Hugo + GitHub Pages&lt;/h4&gt;&#xA;&lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; Live and Active&lt;br&gt;&#xA;&lt;strong&gt;Technologies:&lt;/strong&gt; Hugo, GitHub Actions, Markdown, Git&lt;br&gt;&#xA;&lt;strong&gt;Description:&lt;/strong&gt; Built this cybersecurity blog from scratch using Hugo static site generator and GitHub Pages. Features automated deployment and cross-platform editing capabilities.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;What I Learned:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Static site generators and modern web deployment&lt;/li&gt;&#xA;&lt;li&gt;Git version control and collaborative workflows&lt;/li&gt;&#xA;&lt;li&gt;GitHub Actions for CI/CD&lt;/li&gt;&#xA;&lt;li&gt;Technical writing and documentation&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/Kile578/Kile578.github.io&#34;&gt;&lt;strong&gt;View Source Code&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
