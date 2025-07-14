@@ -25,6 +25,12 @@ Welcome to my project showcase! Here you'll find labs, experiments, and hands-on
 
 ### Upcoming Projects
 
+## Tryhackme
+🎯 [TryHackMe Writeups](/tryhackme/)
+Complete walkthroughs of penetration testing challenges and learning paths.  
+**Status:** Active | **Rooms Completed:** Coming Soon
+
+
 #### Home Lab Setup
 **Status:** Planning Phase  
 **Focus:** Building a personal cybersecurity lab environment for hands-on learning and experimentation.
@@ -49,6 +55,18 @@ Coming soon! I'll be documenting various cybersecurity labs, challenges, and exp
 - **Security Tools:** Learning industry-standard security software
 - **Risk Assessment:** Understanding and evaluating security threats
 
+## Quick Access
+
+### 🎯 [TryHackMe Writeups](/tryhackme/)
+Complete walkthroughs of penetration testing challenges and learning paths.  
+**Status:** Active | **Rooms Completed:** Coming Soon
+
 ---
+
+## Current Projects
+[Keep your existing content below this line...]
+
+---
+
 
 *This page will be updated regularly as I complete new projects and labs. Check back often to see my progress!*

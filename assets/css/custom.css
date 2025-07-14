@@ -1,0 +1,75 @@
+/* Dropdown Menu Styling */
+.main-menu .menu {
+    position: relative;
+}
+
+.main-menu .menu li {
+    position: relative;
+}
+
+/* Hide dropdown by default */
+.main-menu .menu li ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    min-width: 180px;
+    z-index: 1000;
+    padding: 8px 0;
+    margin-top: 2px;
+}
+
+/* Show dropdown on hover */
+.main-menu .menu li:hover > ul {
+    display: block;
+}
+
+/* Dropdown list items */
+.main-menu .menu li ul li {
+    display: block;
+    width: 100%;
+    border-bottom: none;
+}
+
+/* Dropdown links */
+.main-menu .menu li ul li a {
+    display: block;
+    padding: 12px 16px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+/* Dropdown link hover */
+.main-menu .menu li ul li a:hover {
+    background-color: #f8f9fa;
+    color: #0066cc;
+}
+
+/* Parent item styling */
+.main-menu .menu li.has-children > a::after {
+    content: " ▼";
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+/* Responsive - hide dropdown on mobile */
+@media (max-width: 768px) {
+    .main-menu .menu li ul {
+        position: static;
+        display: none;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+    }
+    
+    .main-menu .menu li.has-children > a::after {
+        content: " ▶";
+    }
+}

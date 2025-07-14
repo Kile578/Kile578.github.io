@@ -6,8 +6,15 @@
     <description>Recent content on My Cybersecurity Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Jul 2025 21:41:55 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 14 Jul 2025 15:00:00 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TryHackMe Writeups</title>
+      <link>http://localhost:1313/tryhackme/</link>
+      <pubDate>Mon, 14 Jul 2025 15:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/tryhackme/</guid>
+      <description>&lt;h1 id=&#34;tryhackme-lab-writeups&#34;&gt;TryHackMe Lab Writeups&lt;/h1&gt;&#xA;&lt;p&gt;Welcome to my TryHackMe journey! Click any room name below to read the complete writeup.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;My TryHackMe Profile:&lt;/strong&gt; &lt;a href=&#34;https://tryhackme.com/p/YourUsername&#34;&gt;Kile578&lt;/a&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;easy-rooms&#34;&gt;Easy Rooms&lt;/h2&gt;&#xA;&lt;h3 id=&#34;basic-pentesting&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/tryhackme-basic-pentesting/&#34;&gt;Basic Pentesting&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Category:&lt;/strong&gt; Web Security | &lt;strong&gt;Status:&lt;/strong&gt; Coming Soon&lt;br&gt;&#xA;Web enumeration and privilege escalation fundamentals.&lt;/p&gt;&#xA;&lt;h3 id=&#34;vulnversity&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/tryhackme-vulnversity/&#34;&gt;Vulnversity&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Category:&lt;/strong&gt; Web Security | &lt;strong&gt;Status:&lt;/strong&gt; Coming Soon&lt;br&gt;&#xA;File upload vulnerabilities and reverse shell techniques.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>My Cybersecurity Learning Journey</title>
       <link>http://localhost:1313/posts/my-cybersecurity-learning-journey/</link>
@@ -34,7 +41,7 @@
       <link>http://localhost:1313/projects/</link>
       <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/projects/</guid>
-      <description>&lt;h2 id=&#34;my-cybersecurity-projects&#34;&gt;My Cybersecurity Projects&lt;/h2&gt;&#xA;&lt;p&gt;Welcome to my project showcase! Here you&amp;rsquo;ll find labs, experiments, and hands-on work as I develop my cybersecurity skills.&lt;/p&gt;&#xA;&lt;h3 id=&#34;current-projects&#34;&gt;Current Projects&lt;/h3&gt;&#xA;&lt;h4 id=&#34;this-blog---hugo--github-pages&#34;&gt;This Blog - Hugo + GitHub Pages&lt;/h4&gt;&#xA;&lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; Live and Active&lt;br&gt;&#xA;&lt;strong&gt;Technologies:&lt;/strong&gt; Hugo, GitHub Actions, Markdown, Git&lt;br&gt;&#xA;&lt;strong&gt;Description:&lt;/strong&gt; Built this cybersecurity blog from scratch using Hugo static site generator and GitHub Pages. Features automated deployment and cross-platform editing capabilities.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;What I Learned:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Static site generators and modern web deployment&lt;/li&gt;&#xA;&lt;li&gt;Git version control and collaborative workflows&lt;/li&gt;&#xA;&lt;li&gt;GitHub Actions for CI/CD&lt;/li&gt;&#xA;&lt;li&gt;Technical writing and documentation&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/Kile578/Kile578.github.io&#34;&gt;&lt;strong&gt;View Source Code&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;my-cybersecurity-projects&#34;&gt;My Cybersecurity Projects&lt;/h2&gt;&#xA;&lt;p&gt;Welcome to my project showcase! Here you&amp;rsquo;ll find labs, experiments, and hands-on work as I develop my cybersecurity skills.&lt;/p&gt;&#xA;&lt;h3 id=&#34;current-projects&#34;&gt;Current Projects&lt;/h3&gt;&#xA;&lt;h4 id=&#34;this-blog---hugo--github-pages&#34;&gt;This Blog - Hugo + GitHub Pages&lt;/h4&gt;&#xA;&lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; Live and Active&lt;br&gt;&#xA;&lt;strong&gt;Technologies:&lt;/strong&gt; Hugo, GitHub Actions, Markdown, Git&lt;br&gt;&#xA;&lt;strong&gt;Description:&lt;/strong&gt; Built this cybersecurity blog from scratch using Hugo static site generator and GitHub Pages. Features automated deployment and cross-platform editing capabilities.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

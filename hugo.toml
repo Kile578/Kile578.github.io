@@ -2,6 +2,7 @@ baseURL = 'https://Kile578.github.io'
 languageCode = 'en-us'
 title = 'My Cybersecurity Blog'
 theme = 'ananke'
+summaryLength = 50
 
 [menu]
   [[menu.main]]
@@ -16,6 +17,26 @@ theme = 'ananke'
     name = "Projects"
     url = "/projects/"
     weight = 3
+  [[menu.main]]
+    name = "TryHackMe"
+    url = "/tryhackme/"
+    parent = "Projects"
+    weight = 31
+  [[menu.main]]
+    name = "Home Lab"
+    url = "/homelab/"
+    parent = "Projects"
+    weight = 32
+  [[menu.main]]
+    name = "Security Tools"
+    url = "/tools/"
+    parent = "Projects"
+    weight = 33
+  [[menu.main]]
+    name = "CTF Writeups"
+    url = "/ctf/"
+    parent = "Projects"
+    weight = 34
   [[menu.main]]
     name = "Contact"
     url = "/contact/"
