@@ -14,6 +14,10 @@ Welcome to my TryHackMe journey! Click any room name below to read the complete 
 
 ## Easy Rooms
 
+### [How Websites Work](/posts/tryhackme-how-websites-work/)
+**Category:**  | **Status:** Coming Soon  
+Web enumeration and privilege escalation fundamentals.
+
 ### [Basic Pentesting](/posts/tryhackme-basic-pentesting/)
 **Category:** Web Security | **Status:** Coming Soon  
 Web enumeration and privilege escalation fundamentals.
