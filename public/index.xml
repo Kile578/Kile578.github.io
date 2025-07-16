@@ -6,14 +6,42 @@
     <description>Recent content on My Cybersecurity Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Jul 2025 15:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 14 Jul 2025 17:48:13 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>TryHackMe Writeups</title>
-      <link>http://localhost:1313/tryhackme/</link>
+      <title>TryHackMe How Websites Work</title>
+      <link>http://localhost:1313/posts/how-websites-work/</link>
+      <pubDate>Mon, 14 Jul 2025 17:48:13 -0700</pubDate>
+      <guid>http://localhost:1313/posts/how-websites-work/</guid>
+      <description>&lt;h1 id=&#34;tryhackme-how-websites-work-a-beginners-journey-into-web-security&#34;&gt;TryHackMe How Websites Work: A Beginner&amp;rsquo;s Journey into Web Security&lt;/h1&gt;&#xA;&lt;p&gt;&lt;em&gt;Learn web fundamentals and discover security vulnerabilities through hands-on practice&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Ever wondered what happens behind the scenes when you visit a website? Or how cybersecurity professionals find vulnerabilities in web applications? I recently completed TryHackMe&amp;rsquo;s &amp;ldquo;How Websites Work&amp;rdquo; room, and I&amp;rsquo;m excited to share my journey from complete beginner to understanding the fundamentals of web security.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TryHackMe Intro to Cross-Site Scripting</title>
+      <link>http://localhost:1313/posts/cross-site-scripting/</link>
+      <pubDate>Mon, 14 Jul 2025 17:48:13 -0700</pubDate>
+      <guid>http://localhost:1313/posts/cross-site-scripting/</guid>
+      <description>&lt;h1 id=&#34;tryhackme-intro-to-cross-site-scripting-mastering-web-application-security&#34;&gt;TryHackMe Intro to Cross-Site Scripting: Mastering Web Application Security&lt;/h1&gt;&#xA;&lt;p&gt;&lt;em&gt;Learn XSS fundamentals and discover how to identify and exploit client-side vulnerabilities&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Ever wondered how attackers can execute malicious code in someone else&amp;rsquo;s browser through a website? Or how cybersecurity professionals identify and exploit Cross-Site Scripting (XSS) vulnerabilities? I recently completed TryHackMe&amp;rsquo;s &amp;ldquo;Intro to Cross-Site Scripting&amp;rdquo; room, and I&amp;rsquo;m excited to share my journey into one of the most prevalent web application security vulnerabilities.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TryHackMe Nmap: Mastering Network Reconnaissance</title>
+      <link>http://localhost:1313/posts/nmap/</link>
+      <pubDate>Mon, 14 Jul 2025 17:48:13 -0700</pubDate>
+      <guid>http://localhost:1313/posts/nmap/</guid>
+      <description>&lt;h1 id=&#34;tryhackme-nmap-mastering-network-reconnaissance-and-port-scanning&#34;&gt;TryHackMe Nmap: Mastering Network Reconnaissance and Port Scanning&lt;/h1&gt;&#xA;&lt;p&gt;&lt;em&gt;Learn the fundamentals of network scanning and discover how cybersecurity professionals map network infrastructure&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Ever wondered how cybersecurity professionals discover live devices on a network and identify the services running on them? I recently completed TryHackMe&amp;rsquo;s &amp;ldquo;Nmap&amp;rdquo; room, and I&amp;rsquo;m excited to share my journey from basic network concepts to mastering one of the most essential tools in cybersecurity.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Projects</title>
+      <link>http://localhost:1313/projects/projects/</link>
       <pubDate>Mon, 14 Jul 2025 15:00:00 -0700</pubDate>
-      <guid>http://localhost:1313/tryhackme/</guid>
-      <description>&lt;h1 id=&#34;tryhackme-lab-writeups&#34;&gt;TryHackMe Lab Writeups&lt;/h1&gt;&#xA;&lt;p&gt;Welcome to my TryHackMe journey! Click any room name below to read the complete writeup.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;My TryHackMe Profile:&lt;/strong&gt; &lt;a href=&#34;https://tryhackme.com/p/YourUsername&#34;&gt;Kile578&lt;/a&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;easy-rooms&#34;&gt;Easy Rooms&lt;/h2&gt;&#xA;&lt;h3 id=&#34;basic-pentesting&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/tryhackme-basic-pentesting/&#34;&gt;Basic Pentesting&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Category:&lt;/strong&gt; Web Security | &lt;strong&gt;Status:&lt;/strong&gt; Coming Soon&lt;br&gt;&#xA;Web enumeration and privilege escalation fundamentals.&lt;/p&gt;&#xA;&lt;h3 id=&#34;vulnversity&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/tryhackme-vulnversity/&#34;&gt;Vulnversity&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Category:&lt;/strong&gt; Web Security | &lt;strong&gt;Status:&lt;/strong&gt; Coming Soon&lt;br&gt;&#xA;File upload vulnerabilities and reverse shell techniques.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/projects/projects/</guid>
+      <description>&lt;h1 id=&#34;my-projects&#34;&gt;My Projects&lt;/h1&gt;&#xA;&lt;h2 id=&#34;cybersecurity-learning&#34;&gt;Cybersecurity Learning&lt;/h2&gt;&#xA;&lt;h3 id=&#34;tryhackme-writeups&#34;&gt;&lt;a href=&#34;http://localhost:1313/projects/tryhackme/&#34;&gt;TryHackMe Writeups&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;Comprehensive writeups of TryHackMe rooms covering web security, network reconnaissance, penetration testing fundamentals, and hands-on cybersecurity challenges.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Completed Rooms:&lt;/strong&gt; 3 | &lt;strong&gt;Current Focus:&lt;/strong&gt; Beginner Path&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;development-projects&#34;&gt;Development Projects&lt;/h2&gt;&#xA;&lt;h3 id=&#34;project-1&#34;&gt;Project 1&lt;/h3&gt;&#xA;&lt;p&gt;Description of your coding projects&amp;hellip;&lt;/p&gt;&#xA;&lt;h3 id=&#34;project-2&#34;&gt;Project 2&lt;/h3&gt;&#xA;&lt;p&gt;Other projects&amp;hellip;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;research--labs&#34;&gt;Research &amp;amp; Labs&lt;/h2&gt;&#xA;&lt;h3 id=&#34;security-research&#34;&gt;Security Research&lt;/h3&gt;&#xA;&lt;p&gt;Your security research work&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TryHackMe Writeups</title>
+      <link>http://localhost:1313/projects/tryhackme/</link>
+      <pubDate>Mon, 14 Jul 2025 15:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/projects/tryhackme/</guid>
+      <description>&lt;h1 id=&#34;tryhackme-lab-writeups&#34;&gt;TryHackMe Lab Writeups&lt;/h1&gt;&#xA;&lt;p&gt;Welcome to my TryHackMe journey! Click any room name below to read the complete writeup.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;My TryHackMe Profile:&lt;/strong&gt; &lt;a href=&#34;https://tryhackme.com/p/driscollkile&#34;&gt;Kile578&lt;/a&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;easy-rooms&#34;&gt;Easy Rooms&lt;/h2&gt;&#xA;&lt;h3 id=&#34;how-websites-work&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/how-websites-work&#34;&gt;How Websites Work&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Category:&lt;/strong&gt; Web Security | &lt;strong&gt;Status:&lt;/strong&gt; Complete&lt;br&gt;&#xA;Web fundamentals and security vulnerabilities through hands-on practice.&lt;/p&gt;&#xA;&lt;h3 id=&#34;nmap&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/nmap&#34;&gt;Nmap&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Category:&lt;/strong&gt; Network Security | &lt;strong&gt;Status:&lt;/strong&gt; Complete&lt;br&gt;&#xA;Network reconnaissance and port scanning fundamentals.&lt;/p&gt;</description>
     </item>
     <item>
       <title>My Cybersecurity Learning Journey</title>
@@ -35,13 +63,6 @@
       <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/contact/</guid>
       <description>&lt;h2 id=&#34;get-in-touch&#34;&gt;Get In Touch&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;d love to connect with fellow cybersecurity enthusiasts, students, professionals, and anyone interested in information security!&lt;/p&gt;&#xA;&lt;h3 id=&#34;why-reach-out&#34;&gt;Why Reach Out?&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Networking:&lt;/strong&gt; Connect with others in the cybersecurity field&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Collaboration:&lt;/strong&gt; Discuss potential projects or study partnerships&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Mentorship:&lt;/strong&gt; Both seeking and offering guidance on cybersecurity careers&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Feedback:&lt;/strong&gt; Share thoughts on my blog posts or suggest topics&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Questions:&lt;/strong&gt; Ask about my journey or specific experiences&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;best-ways-to-connect&#34;&gt;Best Ways to Connect&lt;/h3&gt;&#xA;&lt;h4 id=&#34;professional-networking&#34;&gt;Professional Networking&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;LinkedIn:&lt;/strong&gt; [www.linkedin.com/in/kile-driscoll] - Best for professional connections and career discussions&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;technical-discussions&#34;&gt;Technical Discussions&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;GitHub:&lt;/strong&gt; &lt;a href=&#34;https://github.com/Kile578&#34;&gt;Kile578&lt;/a&gt; - Check out my code and projects&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Email:&lt;/strong&gt; [driscollkile@gmail.com] - For detailed discussions or collaboration inquiries&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;community-engagement&#34;&gt;Community Engagement&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Blog Comments:&lt;/strong&gt; Feel free to comment on any of my posts&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Social Media:&lt;/strong&gt; [Your preferred platforms]&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;response-time&#34;&gt;Response Time&lt;/h3&gt;&#xA;&lt;p&gt;I typically respond to messages within 24-48 hours. For urgent matters, LinkedIn is usually the fastest way to reach me.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Projects</title>
-      <link>http://localhost:1313/projects/</link>
-      <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/</guid>
-      <description>&lt;h2 id=&#34;my-cybersecurity-projects&#34;&gt;My Cybersecurity Projects&lt;/h2&gt;&#xA;&lt;p&gt;Welcome to my project showcase! Here you&amp;rsquo;ll find labs, experiments, and hands-on work as I develop my cybersecurity skills.&lt;/p&gt;&#xA;&lt;h3 id=&#34;current-projects&#34;&gt;Current Projects&lt;/h3&gt;&#xA;&lt;h4 id=&#34;this-blog---hugo--github-pages&#34;&gt;This Blog - Hugo + GitHub Pages&lt;/h4&gt;&#xA;&lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; Live and Active&lt;br&gt;&#xA;&lt;strong&gt;Technologies:&lt;/strong&gt; Hugo, GitHub Actions, Markdown, Git&lt;br&gt;&#xA;&lt;strong&gt;Description:&lt;/strong&gt; Built this cybersecurity blog from scratch using Hugo static site generator and GitHub Pages. Features automated deployment and cross-platform editing capabilities.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

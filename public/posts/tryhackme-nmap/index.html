@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>TryHackMe Nmap: Mastering Network Reconnaissance | My Cybersecurity Blog</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="TryHackMe Nmap: Mastering Network Reconnaissance and Port Scanning
+Learn the fundamentals of network scanning and discover how cybersecurity professionals map network infrastructure
+
+Introduction
+Ever wondered how cybersecurity professionals discover live devices on a network and identify the services running on them? I recently completed TryHackMe&rsquo;s &ldquo;Nmap&rdquo; room, and I&rsquo;m excited to share my journey from basic network concepts to mastering one of the most essential tools in cybersecurity.">
+    <meta name="generator" content="Hugo 0.148.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/posts/tryhackme-nmap/">
+    
+
+    <meta property="og:url" content="http://localhost:1313/posts/tryhackme-nmap/">
+  <meta property="og:site_name" content="My Cybersecurity Blog">
+  <meta property="og:title" content="TryHackMe Nmap: Mastering Network Reconnaissance">
+  <meta property="og:description" content="TryHackMe Nmap: Mastering Network Reconnaissance and Port Scanning Learn the fundamentals of network scanning and discover how cybersecurity professionals map network infrastructure
+Introduction Ever wondered how cybersecurity professionals discover live devices on a network and identify the services running on them? I recently completed TryHackMe’s “Nmap” room, and I’m excited to share my journey from basic network concepts to mastering one of the most essential tools in cybersecurity.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-14T17:48:13-07:00">
+    <meta property="article:modified_time" content="2025-07-14T17:48:13-07:00">
+
+  <meta itemprop="name" content="TryHackMe Nmap: Mastering Network Reconnaissance">
+  <meta itemprop="description" content="TryHackMe Nmap: Mastering Network Reconnaissance and Port Scanning Learn the fundamentals of network scanning and discover how cybersecurity professionals map network infrastructure
+Introduction Ever wondered how cybersecurity professionals discover live devices on a network and identify the services running on them? I recently completed TryHackMe’s “Nmap” room, and I’m excited to share my journey from basic network concepts to mastering one of the most essential tools in cybersecurity.">
+  <meta itemprop="datePublished" content="2025-07-14T17:48:13-07:00">
+  <meta itemprop="dateModified" content="2025-07-14T17:48:13-07:00">
+  <meta itemprop="wordCount" content="2749">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TryHackMe Nmap: Mastering Network Reconnaissance">
+  <meta name="twitter:description" content="TryHackMe Nmap: Mastering Network Reconnaissance and Port Scanning Learn the fundamentals of network scanning and discover how cybersecurity professionals map network infrastructure
+Introduction Ever wondered how cybersecurity professionals discover live devices on a network and identify the services running on them? I recently completed TryHackMe’s “Nmap” room, and I’m excited to share my journey from basic network concepts to mastering one of the most essential tools in cybersecurity.">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        My Cybersecurity Blog
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="Home page">
+              Home
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/projects/" title="Projects page">
+              Projects
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/contact/" title="Contact page">
+              Contact
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">TryHackMe Nmap: Mastering Network Reconnaissance</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2025-07-14T17:48:13-07:00">July 14, 2025</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id="tryhackme-nmap-mastering-network-reconnaissance-and-port-scanning">TryHackMe Nmap: Mastering Network Reconnaissance and Port Scanning</h1>
+<p><em>Learn the fundamentals of network scanning and discover how cybersecurity professionals map network infrastructure</em></p>
+<hr>
+<h2 id="introduction">Introduction</h2>
+<p>Ever wondered how cybersecurity professionals discover live devices on a network and identify the services running on them? I recently completed TryHackMe&rsquo;s &ldquo;Nmap&rdquo; room, and I&rsquo;m excited to share my journey from basic network concepts to mastering one of the most essential tools in cybersecurity.</p>
+<p>This comprehensive guide will walk you through everything I learned about network reconnaissance, host discovery, port scanning techniques, service detection, and advanced Nmap features that every cybersecurity professional needs to master.</p>
+<p><strong>What you&rsquo;ll learn from this post:</strong></p>
+<ul>
+<li>Network scanning fundamentals and methodology</li>
+<li>Host discovery techniques for finding live systems</li>
+<li>Different port scanning types and their applications</li>
+<li>Service and version detection capabilities</li>
+<li>Timing controls and stealth techniques</li>
+<li>Output formatting and reporting options</li>
+</ul>
+<hr>
+<h2 id="room-information">Room Information</h2>
+<ul>
+<li><strong>Room Name</strong>: Nmap</li>
+<li><strong>Difficulty</strong>: Easy (Perfect for beginners!)</li>
+<li><strong>Platform</strong>: TryHackMe</li>
+<li><strong>Room URL</strong>: <a href="https://tryhackme.com/room/nmap">https://tryhackme.com/room/nmap</a></li>
+<li><strong>Estimated Time</strong>: 2-3 hours</li>
+<li><strong>Skills Required</strong>: Basic networking knowledge (TCP/IP model recommended)</li>
+<li><strong>Skills Gained</strong>: Network reconnaissance, host discovery, port scanning, service detection</li>
+</ul>
+<hr>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>This room covers essential network reconnaissance concepts that form the foundation for penetration testing and security assessments:</p>
+<ul>
+<li>Discovering live hosts on networks efficiently</li>
+<li>Finding running services on discovered hosts</li>
+<li>Distinguishing between different types of port scans</li>
+<li>Detecting versions of running services</li>
+<li>Controlling scan timing for stealth and efficiency</li>
+<li>Formatting output for analysis and reporting</li>
+</ul>
+<hr>
+<h2 id="foundation-knowledge-why-nmap-matters">Foundation Knowledge: Why Nmap Matters</h2>
+<h3 id="the-manual-approach-problem">The Manual Approach Problem</h3>
+<p>Imagine being asked to discover which devices are live on a <code>192.168.0.1/24</code> network. The manual approach would involve:</p>
+<ul>
+<li>Using basic tools like <code>ping</code> for each of the 254 IP addresses</li>
+<li>Dealing with limitations like firewalls blocking ICMP traffic</li>
+<li>Using <code>arp-scan</code> only when connected to the same network</li>
+<li>Manually checking thousands of ports with tools like <code>telnet</code></li>
+</ul>
+<p>This approach is incredibly time-consuming and inefficient, which is where Nmap becomes invaluable.</p>
+<h3 id="enter-nmap-the-network-mapper">Enter Nmap: The Network Mapper</h3>
+<p>Nmap is an open-source network scanner first published in 1997. It&rsquo;s a powerful and flexible tool that can be adapted to various scenarios, solving both host discovery and service detection requirements efficiently.</p>
+<hr>
+<h2 id="task-1-introduction---setting-the-foundation">Task 1: Introduction - Setting the Foundation</h2>
+<h3 id="understanding-the-challenge">Understanding the Challenge</h3>
+<p>Two fundamental questions arise when analyzing networks:</p>
+<ol>
+<li><strong>Host Discovery</strong>: How can we discover other live devices on this network or other networks?</li>
+<li><strong>Service Detection</strong>: How can we find out the network services running on these live devices?</li>
+</ol>
+<h3 id="learning-objectives-recap">Learning Objectives Recap</h3>
+<p>In this room, we learn how to:</p>
+<ul>
+<li>Discover live hosts</li>
+<li>Find running services on the live hosts</li>
+<li>Distinguish the different types of port scans</li>
+<li>Detect the versions of the running services</li>
+<li>Control the timing</li>
+<li>Format the output</li>
+</ul>
+<h3 id="task-challenge">Task Challenge</h3>
+<p><strong>Question</strong>: It&rsquo;s time to find out who is listening on the network.</p>
+<p><strong>Answer</strong>: No answer needed</p>
+<p><strong>Key Insight</strong>: This introduction sets the stage for understanding why network reconnaissance is essential and how Nmap solves traditional manual scanning limitations.</p>
+<hr>
+<h2 id="task-2-host-discovery---who-is-online">Task 2: Host Discovery - Who Is Online</h2>
+<h3 id="understanding-host-discovery">Understanding Host Discovery</h3>
+<p>Host discovery is the first step in network reconnaissance - finding out which systems are alive and responsive on a target network before diving into detailed port scanning.</p>
+<h3 id="target-specification-methods">Target Specification Methods</h3>
+<p>Nmap offers multiple ways to specify targets:</p>
+<p><strong>IP Range using dash (-):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap 192.168.0.1-10  <span style="color:#75715e"># Scans from 192.168.0.1 to 192.168.0.10</span>
+</span></span></code></pre></div><p><strong>IP Subnet using CIDR (/):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap 192.168.0.1/24  <span style="color:#75715e"># Scans entire subnet (192.168.0.0-255)</span>
+</span></span></code></pre></div><p><strong>Hostname:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap example.thm  <span style="color:#75715e"># Target by hostname</span>
+</span></span></code></pre></div><h3 id="the-ping-scan--sn">The Ping Scan (-sn)</h3>
+<p>The <code>-sn</code> option performs a ping scan for host discovery without port scanning:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sn 192.168.66.0/24
+</span></span></code></pre></div><h3 id="scanning-local-vs-remote-networks">Scanning Local vs Remote Networks</h3>
+<p><strong>Local Network Scanning:</strong>
+When scanning a directly connected network (Ethernet/WiFi), Nmap uses ARP requests to discover hosts. This provides additional information like MAC addresses and vendor identification.</p>
+<p><em>Example Output:</em></p>
+<pre tabindex="0"><code>Nmap scan report for XiaoQiang (192.168.66.1)
+Host is up (0.0069s latency).
+MAC Address: 44:DF:65:D8:FE:6C (Unknown)
+</code></pre><p><strong>Remote Network Scanning:</strong>
+For networks separated by routers, Nmap cannot use ARP requests. Instead, it uses:</p>
+<ul>
+<li>ICMP echo requests (ping)</li>
+<li>ICMP timestamp requests</li>
+<li>TCP SYN packets to port 443</li>
+<li>TCP ACK packets to port 80</li>
+</ul>
+<h3 id="additional-discovery-options">Additional Discovery Options</h3>
+<p><strong>List Scan (-sL):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sL 192.168.0.1/24  <span style="color:#75715e"># Lists targets without scanning</span>
+</span></span></code></pre></div><p>This helps confirm targets before running actual scans.</p>
+<h3 id="task-challenge-1">Task Challenge</h3>
+<p><strong>Question</strong>: What is the last IP address that will be scanned when your scan target is 192.168.0.1/27?</p>
+<p><strong>Answer</strong>: [Your calculation - remember /27 subnet mask]</p>
+<p><strong>Explanation</strong>: [Explain how you calculated the subnet range]</p>
+<hr>
+<h2 id="task-3-port-scanning---who-is-listening">Task 3: Port Scanning - Who Is Listening</h2>
+<h3 id="understanding-port-scanning">Understanding Port Scanning</h3>
+<p>After discovering live hosts, the next step is identifying which network services are listening on these systems. By design, both TCP and UDP have 65,535 ports each.</p>
+<h3 id="tcp-port-scanning-methods">TCP Port Scanning Methods</h3>
+<h3 id="connect-scan--st">Connect Scan (-sT)</h3>
+<p>The connect scan attempts to complete the full TCP three-way handshake:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sT target_ip
+</span></span></code></pre></div><p><strong>Characteristics:</strong></p>
+<ul>
+<li>Completes full TCP handshake</li>
+<li>More likely to be logged by target systems</li>
+<li>Works without root privileges</li>
+<li>Slower than other scan types</li>
+<li>More detectable but reliable</li>
+</ul>
+<h3 id="syn-scan--ss---the-stealth-scan">SYN Scan (-sS) - The Stealth Scan</h3>
+<p>The SYN scan only sends the first step of the TCP handshake:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sS target_ip
+</span></span></code></pre></div><p><strong>Characteristics:</strong></p>
+<ul>
+<li>Sends only TCP SYN packet</li>
+<li>Never completes the handshake</li>
+<li>More stealthy (fewer logs)</li>
+<li>Requires root privileges</li>
+<li>Faster than connect scans</li>
+<li>Default scan type when running as root</li>
+</ul>
+<h3 id="udp-scanning--su">UDP Scanning (-sU)</h3>
+<p>UDP scanning targets connectionless UDP services:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sU target_ip
+</span></span></code></pre></div><p><strong>Important UDP Services:</strong></p>
+<ul>
+<li>DNS (port 53)</li>
+<li>DHCP (ports 67/68)</li>
+<li>NTP (port 123)</li>
+<li>SNMP (port 161)</li>
+<li>VoIP services</li>
+</ul>
+<p><strong>Characteristics:</strong></p>
+<ul>
+<li>More challenging due to UDP&rsquo;s connectionless nature</li>
+<li>Slower than TCP scans</li>
+<li>Often filtered by firewalls</li>
+<li>Essential for complete network assessment</li>
+</ul>
+<h3 id="limiting-target-ports">Limiting Target Ports</h3>
+<p><strong>Fast Mode (-F):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -F target_ip  <span style="color:#75715e"># Scans 100 most common ports</span>
+</span></span></code></pre></div><p><strong>Port Range Specification (-p):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -p 10-1024 target_ip    <span style="color:#75715e"># Scan ports 10-1024</span>
+</span></span><span style="display:flex;"><span>nmap -p 80,443,8080 target_ip  <span style="color:#75715e"># Scan specific ports</span>
+</span></span><span style="display:flex;"><span>nmap -p- target_ip           <span style="color:#75715e"># Scan all ports (1-65535)</span>
+</span></span></code></pre></div><h3 id="summary-table">Summary Table</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Option</th>
+          <th>Explanation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-sT</td>
+          <td>TCP connect scan – complete three-way handshake</td>
+      </tr>
+      <tr>
+          <td>-sS</td>
+          <td>TCP SYN – only first step of the three-way handshake</td>
+      </tr>
+      <tr>
+          <td>-sU</td>
+          <td>UDP scan</td>
+      </tr>
+      <tr>
+          <td>-F</td>
+          <td>Fast mode – scans the 100 most common ports</td>
+      </tr>
+      <tr>
+          <td>-p[range]</td>
+          <td>Specifies a range of port numbers – -p- scans all ports</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="task-challenges">Task Challenges</h3>
+<p><strong>Challenge 1: TCP Port Discovery</strong>
+<em>Question</em>: How many TCP ports are open on the target system at MACHINE_IP?</p>
+<p><em>Command Used</em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sS MACHINE_IP
+</span></span></code></pre></div><p><em>Answer</em>: <strong>6</strong></p>
+<p><strong>Challenge 2: Web Server Discovery</strong>
+<em>Question</em>: Find the listening web server on MACHINE_IP and access it with your browser. What is the flag that appears on its main page?</p>
+<p><em>Approach</em>: [Document your process of finding the web server port and accessing it]</p>
+<p><em>Answer</em>: [Your flag discovery]</p>
+<hr>
+<h2 id="task-4-version-detection---extract-more-information">Task 4: Version Detection - Extract More Information</h2>
+<h3 id="operating-system-detection--o">Operating System Detection (-O)</h3>
+<p>OS detection uses various indicators to make educated guesses about target operating systems:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -O target_ip
+</span></span></code></pre></div><p><em>Example Output:</em></p>
+<pre tabindex="0"><code>Device type: general purpose
+Running: Linux 4.X|5.X
+OS details: Linux 4.15 - 5.8
+</code></pre><h3 id="service-and-version-detection--sv">Service and Version Detection (-sV)</h3>
+<p>Version detection identifies specific service versions running on open ports:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sV target_ip
+</span></span></code></pre></div><p><em>Example Output:</em></p>
+<pre tabindex="0"><code>PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.10
+</code></pre><h3 id="aggressive-scan--a">Aggressive Scan (-A)</h3>
+<p>The <code>-A</code> option combines multiple detection methods:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -A target_ip
+</span></span></code></pre></div><p><strong>Includes:</strong></p>
+<ul>
+<li>OS detection (-O)</li>
+<li>Service version detection (-sV)</li>
+<li>Traceroute</li>
+<li>Additional scripts and detection methods</li>
+</ul>
+<h3 id="forcing-scans--pn">Forcing Scans (-Pn)</h3>
+<p>Sometimes hosts don&rsquo;t respond to ping but have open ports:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -Pn target_ip  <span style="color:#75715e"># Treat all hosts as online</span>
+</span></span></code></pre></div><h3 id="summary-table-1">Summary Table</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Option</th>
+          <th>Explanation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-O</td>
+          <td>OS detection</td>
+      </tr>
+      <tr>
+          <td>-sV</td>
+          <td>Service and version detection</td>
+      </tr>
+      <tr>
+          <td>-A</td>
+          <td>OS detection, version detection, and other additions</td>
+      </tr>
+      <tr>
+          <td>-Pn</td>
+          <td>Scan hosts that appear to be down</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="task-challenge-2">Task Challenge</h3>
+<p><strong>Question</strong>: What is the name and detected version of the web server running on MACHINE_IP?</p>
+<p><strong>Command</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sV MACHINE_IP
+</span></span></code></pre></div><p><strong>Answer</strong>: [Your detected web server and version]</p>
+<p><strong>Explanation</strong>: [How you identified the specific service version]</p>
+<hr>
+<h2 id="task-5-timing---how-fast-is-fast">Task 5: Timing - How Fast is Fast</h2>
+<h3 id="understanding-timing-templates">Understanding Timing Templates</h3>
+<p>Nmap provides six timing templates to control scan speed and stealth:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Template</th>
+          <th>Name</th>
+          <th>Speed</th>
+          <th>Use Case</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-T0</td>
+          <td>Paranoid</td>
+          <td>Extremely slow</td>
+          <td>IDS evasion</td>
+      </tr>
+      <tr>
+          <td>-T1</td>
+          <td>Sneaky</td>
+          <td>Very slow</td>
+          <td>Stealth scanning</td>
+      </tr>
+      <tr>
+          <td>-T2</td>
+          <td>Polite</td>
+          <td>Slow</td>
+          <td>Courteous scanning</td>
+      </tr>
+      <tr>
+          <td>-T3</td>
+          <td>Normal</td>
+          <td>Default</td>
+          <td>Standard scanning</td>
+      </tr>
+      <tr>
+          <td>-T4</td>
+          <td>Aggressive</td>
+          <td>Fast</td>
+          <td>Quick results</td>
+      </tr>
+      <tr>
+          <td>-T5</td>
+          <td>Insane</td>
+          <td>Very fast</td>
+          <td>Fast networks only</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="timing-example-results">Timing Example Results</h3>
+<p>Based on scanning 100 ports with different timing templates:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Timing</th>
+          <th>Total Duration</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>T0 (paranoid)</td>
+          <td>9.8 hours</td>
+      </tr>
+      <tr>
+          <td>T1 (sneaky)</td>
+          <td>27.53 minutes</td>
+      </tr>
+      <tr>
+          <td>T2 (polite)</td>
+          <td>40.56 seconds</td>
+      </tr>
+      <tr>
+          <td>T3 (normal)</td>
+          <td>0.15 seconds</td>
+      </tr>
+      <tr>
+          <td>T4 (aggressive)</td>
+          <td>0.13 seconds</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="advanced-timing-controls">Advanced Timing Controls</h3>
+<p><strong>Parallel Probes:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap --min-parallelism <span style="color:#ae81ff">10</span> --max-parallelism <span style="color:#ae81ff">100</span> target_ip
+</span></span></code></pre></div><p><strong>Rate Control:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap --min-rate <span style="color:#ae81ff">100</span> --max-rate <span style="color:#ae81ff">1000</span> target_ip
+</span></span></code></pre></div><p><strong>Host Timeout:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap --host-timeout 30s target_ip
+</span></span></code></pre></div><h3 id="summary-table-2">Summary Table</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Option</th>
+          <th>Explanation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-T&lt;0-5&gt;</td>
+          <td>Timing template – paranoid (0) to insane (5)</td>
+      </tr>
+      <tr>
+          <td>&ndash;min-parallelism/&ndash;max-parallelism</td>
+          <td>Control parallel probes</td>
+      </tr>
+      <tr>
+          <td>&ndash;min-rate/&ndash;max-rate</td>
+          <td>Control packet rate (packets/second)</td>
+      </tr>
+      <tr>
+          <td>&ndash;host-timeout</td>
+          <td>Maximum time to wait for a target host</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="task-challenge-3">Task Challenge</h3>
+<p><strong>Question</strong>: What is the non-numeric equivalent of -T4?</p>
+<p><strong>Answer</strong>: <strong>aggressive</strong></p>
+<p><strong>Explanation</strong>: The -T4 timing template is called &ldquo;aggressive&rdquo; and provides fast scanning for quick results.</p>
+<hr>
+<h2 id="task-6-output---controlling-what-you-see">Task 6: Output - Controlling What You See</h2>
+<h3 id="verbosity-and-debugging">Verbosity and Debugging</h3>
+<h3 id="verbose-output--v">Verbose Output (-v)</h3>
+<p>Adding verbosity shows real-time scan progress:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -v target_ip      <span style="color:#75715e"># Basic verbosity</span>
+</span></span><span style="display:flex;"><span>nmap -vv target_ip     <span style="color:#75715e"># More verbose</span>
+</span></span><span style="display:flex;"><span>nmap -v2 target_ip     <span style="color:#75715e"># Specify verbosity level</span>
+</span></span></code></pre></div><p><strong>Benefits of Verbose Output:</strong></p>
+<ul>
+<li>Real-time scan progress updates</li>
+<li>Understanding of scan phases (ARP ping, DNS resolution, port scanning)</li>
+<li>Helpful for learning and troubleshooting</li>
+<li>Shows timing and packet statistics</li>
+</ul>
+<h3 id="debugging-output--d">Debugging Output (-d)</h3>
+<p>For maximum detail, use debugging:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -d target_ip      <span style="color:#75715e"># Basic debugging</span>
+</span></span><span style="display:flex;"><span>nmap -d9 target_ip     <span style="color:#75715e"># Maximum debugging level</span>
+</span></span></code></pre></div><h3 id="saving-scan-reports">Saving Scan Reports</h3>
+<p>Nmap offers multiple output formats for different use cases:</p>
+<p><strong>Normal Output (-oN):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -oN scan_results.txt target_ip
+</span></span></code></pre></div><p>Human-readable format, perfect for documentation.</p>
+<p><strong>XML Output (-oX):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -oX scan_results.xml target_ip
+</span></span></code></pre></div><p>Machine-readable format for automated processing.</p>
+<p><strong>Grepable Output (-oG):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -oG scan_results.gnmap target_ip
+</span></span></code></pre></div><p>Optimized for grep and awk processing.</p>
+<p><strong>All Formats (-oA):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -oA scan_results target_ip
+</span></span></code></pre></div><p>Creates three files: scan_results.nmap, scan_results.xml, scan_results.gnmap</p>
+<h3 id="summary-table-3">Summary Table</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Option</th>
+          <th>Explanation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-v</td>
+          <td>Verbosity level – for example, -vv and -v4</td>
+      </tr>
+      <tr>
+          <td>-d</td>
+          <td>Debugging level – for example -d and -d9</td>
+      </tr>
+      <tr>
+          <td>-oN</td>
+          <td>Normal output</td>
+      </tr>
+      <tr>
+          <td>-oX</td>
+          <td>XML output</td>
+      </tr>
+      <tr>
+          <td>-oG</td>
+          <td>grep-able output</td>
+      </tr>
+      <tr>
+          <td>-oA</td>
+          <td>Output in all major formats</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="task-challenge-4">Task Challenge</h3>
+<p><strong>Question</strong>: What option must you add to your nmap command to enable debugging?</p>
+<p><strong>Answer</strong>: <strong>-d</strong></p>
+<p><strong>Explanation</strong>: The -d option enables debugging output, providing detailed information about Nmap&rsquo;s scanning process.</p>
+<hr>
+<h2 id="task-7-conclusion-and-summary">Task 7: Conclusion and Summary</h2>
+<h3 id="key-learning-points">Key Learning Points</h3>
+<p>This room provided comprehensive coverage of Nmap&rsquo;s essential features:</p>
+<p><strong>Host Discovery:</strong></p>
+<ul>
+<li>Understanding local vs. remote network scanning</li>
+<li>Using ARP requests for local networks</li>
+<li>ICMP and TCP probes for remote networks</li>
+</ul>
+<p><strong>Port Scanning:</strong></p>
+<ul>
+<li>TCP Connect scans (-sT) for reliability</li>
+<li>SYN scans (-sS) for stealth</li>
+<li>UDP scans (-sU) for complete coverage</li>
+</ul>
+<p><strong>Service Detection:</strong></p>
+<ul>
+<li>OS detection (-O) for system identification</li>
+<li>Version detection (-sV) for service fingerprinting</li>
+<li>Aggressive scanning (-A) for comprehensive information</li>
+</ul>
+<p><strong>Timing and Stealth:</strong></p>
+<ul>
+<li>Six timing templates from paranoid to insane</li>
+<li>Balancing speed with detection avoidance</li>
+<li>Advanced timing controls for specific scenarios</li>
+</ul>
+<h3 id="privilege-requirements">Privilege Requirements</h3>
+<p><strong>Important Note</strong>: Running Nmap with <code>sudo</code> privileges unlocks its full potential:</p>
+<ul>
+<li><strong>With root privileges</strong>: Defaults to SYN scan (-sS)</li>
+<li><strong>Without root privileges</strong>: Limited to connect scan (-sT)</li>
+<li><strong>Best practice</strong>: Use <code>sudo nmap</code> for complete functionality</li>
+</ul>
+<h3 id="complete-options-reference">Complete Options Reference</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Category</th>
+          <th>Option</th>
+          <th>Explanation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>List Scan</strong></td>
+          <td>-sL</td>
+          <td>List targets without scanning</td>
+      </tr>
+      <tr>
+          <td><strong>Host Discovery</strong></td>
+          <td>-sn</td>
+          <td>Ping scan – host discovery only</td>
+      </tr>
+      <tr>
+          <td><strong>Port Scanning</strong></td>
+          <td>-sT</td>
+          <td>TCP connect scan</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>-sS</td>
+          <td>TCP SYN scan</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>-sU</td>
+          <td>UDP scan</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>-F</td>
+          <td>Fast mode (100 common ports)</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>-p[range]</td>
+          <td>Specify port range</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>-Pn</td>
+          <td>Treat all hosts as online</td>
+      </tr>
+      <tr>
+          <td><strong>Service Detection</strong></td>
+          <td>-O</td>
+          <td>OS detection</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>-sV</td>
+          <td>Service version detection</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>-A</td>
+          <td>Aggressive scan (OS, version, scripts)</td>
+      </tr>
+      <tr>
+          <td><strong>Timing</strong></td>
+          <td>-T&lt;0-5&gt;</td>
+          <td>Timing templates</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>&ndash;min/max-parallelism</td>
+          <td>Control parallel probes</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>&ndash;min/max-rate</td>
+          <td>Control packet rate</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>&ndash;host-timeout</td>
+          <td>Maximum wait time</td>
+      </tr>
+      <tr>
+          <td><strong>Output</strong></td>
+          <td>-v</td>
+          <td>Verbosity level</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>-d</td>
+          <td>Debugging level</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>-oN/-oX/-oG/-oA</td>
+          <td>Output formats</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="task-challenge-5">Task Challenge</h3>
+<p><strong>Question</strong>: What kind of scan will Nmap use if you run <code>nmap MACHINE_IP</code> with local user privileges?</p>
+<p><strong>Answer</strong>: <strong>TCP connect scan</strong> (or <strong>connect</strong>)</p>
+<p><strong>Explanation</strong>: Without root privileges, Nmap defaults to TCP connect scan (-sT) since it cannot craft raw packets required for SYN scanning.</p>
+<hr>
+<h2 id="key-takeaways-and-lessons-learned">Key Takeaways and Lessons Learned</h2>
+<h3 id="technical-skills-developed">Technical Skills Developed</h3>
+<p><strong>Network Reconnaissance Mastery:</strong></p>
+<ul>
+<li>Learned systematic approaches to network discovery</li>
+<li>Mastered different scanning techniques for various scenarios</li>
+<li>Understood the importance of timing and stealth considerations</li>
+</ul>
+<p><strong>Service Detection Expertise:</strong></p>
+<ul>
+<li>Developed skills in identifying services and their versions</li>
+<li>Learned to interpret Nmap output effectively</li>
+<li>Understanding the difference between host discovery and service detection</li>
+</ul>
+<p><strong>Operational Awareness:</strong></p>
+<ul>
+<li>Recognized the importance of running with proper privileges</li>
+<li>Learned to balance scanning speed with detection avoidance</li>
+<li>Understood how to format output for different use cases</li>
+</ul>
+<h3 id="security-mindset-development">Security Mindset Development</h3>
+<p><strong>Reconnaissance is Systematic:</strong>
+Effective network scanning requires a methodical approach, starting with host discovery and progressing to detailed service analysis.</p>
+<p><strong>Stealth vs. Speed Trade-offs:</strong>
+Understanding when to prioritize stealth over speed is crucial for realistic security assessments and avoiding detection.</p>
+<p><strong>Privilege Awareness:</strong>
+The difference between running tools with and without elevated privileges significantly impacts their effectiveness.</p>
+<h3 id="real-world-applications">Real-World Applications</h3>
+<p><strong>For Penetration Testers:</strong></p>
+<ul>
+<li>Develop systematic reconnaissance methodologies</li>
+<li>Master timing techniques for different environments</li>
+<li>Build comprehensive target profiles efficiently</li>
+</ul>
+<p><strong>For Network Administrators:</strong></p>
+<ul>
+<li>Understand how attackers discover network assets</li>
+<li>Implement monitoring for scanning activities</li>
+<li>Use the same tools for security assessments</li>
+</ul>
+<p><strong>For Security Analysts:</strong></p>
+<ul>
+<li>Recognize scanning patterns in network traffic</li>
+<li>Understand common reconnaissance techniques</li>
+<li>Develop better detection and response strategies</li>
+</ul>
+<hr>
+<h2 id="tools-and-resources-for-continued-learning">Tools and Resources for Continued Learning</h2>
+<h3 id="essential-nmap-resources">Essential Nmap Resources</h3>
+<p><strong>Official Documentation:</strong></p>
+<ul>
+<li>Nmap Reference Guide: <a href="https://nmap.org/book/">https://nmap.org/book/</a></li>
+<li>Nmap Man Page: <a href="https://nmap.org/docs.html">https://nmap.org/docs.html</a></li>
+<li>Nmap Changelog: <a href="https://nmap.org/changelog.html">https://nmap.org/changelog.html</a></li>
+</ul>
+<p><strong>Community Resources:</strong></p>
+<ul>
+<li>Nmap Users Mailing List</li>
+<li>Security forums and communities</li>
+<li>Practice environments like TryHackMe and HackTheBox</li>
+</ul>
+<h3 id="advanced-learning-path">Advanced Learning Path</h3>
+<p>This room is part of TryHackMe&rsquo;s Network Security module, which includes four rooms dedicated to Nmap:</p>
+<ol>
+<li><strong>Nmap</strong> (this room) - Fundamentals</li>
+<li><strong>Nmap Live Host Discovery</strong> - Advanced host discovery</li>
+<li><strong>Nmap Basic Port Scans</strong> - Detailed port scanning</li>
+<li><strong>Nmap Advanced Port Scans</strong> - Advanced techniques</li>
+</ol>
+<hr>
+<h2 id="common-challenges-and-how-to-overcome-them">Common Challenges and How to Overcome Them</h2>
+<h3 id="challenge-1-permission-issues">Challenge 1: Permission Issues</h3>
+<p><strong>Problem</strong>: Limited functionality when running without root privileges
+<strong>Solution:</strong></p>
+<ul>
+<li>Use <code>sudo nmap</code> for full functionality</li>
+<li>Understand the limitations of non-privileged scanning</li>
+<li>Consider using VPS or dedicated security testing environment</li>
+</ul>
+<h3 id="challenge-2-scan-detection">Challenge 2: Scan Detection</h3>
+<p><strong>Problem</strong>: Scans being detected by security systems
+<strong>Solution:</strong></p>
+<ul>
+<li>Use appropriate timing templates (-T0, -T1, -T2)</li>
+<li>Implement delays between scans</li>
+<li>Consider fragmentation and other evasion techniques</li>
+</ul>
+<h3 id="challenge-3-incomplete-results">Challenge 3: Incomplete Results</h3>
+<p><strong>Problem</strong>: Missing services or hosts
+<strong>Solution:</strong></p>
+<ul>
+<li>Use -Pn to scan &ldquo;down&rdquo; hosts</li>
+<li>Combine different scan types (TCP, UDP)</li>
+<li>Adjust timing for slow networks</li>
+<li>Use -p- for comprehensive port coverage</li>
+</ul>
+<hr>
+<h2 id="conclusion">Conclusion</h2>
+<p>Completing TryHackMe&rsquo;s &ldquo;Nmap&rdquo; room provided an excellent foundation in network reconnaissance fundamentals. This room successfully transformed basic networking knowledge into practical cybersecurity skills essential for any security professional.</p>
+<h3 id="most-valuable-insights">Most Valuable Insights:</h3>
+<p><strong>Systematic Approach</strong>: Effective network reconnaissance follows a structured methodology, from host discovery to detailed service analysis.</p>
+<p><strong>Tool Mastery</strong>: Understanding Nmap&rsquo;s various options and when to use them is crucial for effective reconnaissance.</p>
+<p><strong>Operational Awareness</strong>: Recognizing the importance of privileges, timing, and stealth in real-world scenarios.</p>
+<h3 id="impact-on-my-cybersecurity-journey">Impact on My Cybersecurity Journey:</h3>
+<p>This room provided the foundation for understanding how cybersecurity professionals systematically discover and analyze network infrastructure. The hands-on approach made complex concepts accessible and immediately applicable.</p>
+<h3 id="for-fellow-learners">For Fellow Learners:</h3>
+<p>Whether you&rsquo;re beginning your cybersecurity journey, preparing for security roles, or seeking to understand network reconnaissance better, this room provides invaluable hands-on experience with the industry&rsquo;s most essential scanning tool.</p>
+<p>The journey into network security starts with understanding reconnaissance fundamentals, and the &ldquo;Nmap&rdquo; room provides exactly that foundation. Master these skills, and you&rsquo;ll have a crucial tool for any cybersecurity role.</p>
+<hr>
+<h2 id="connect-with-me">Connect with Me</h2>
+<p>Found this writeup helpful? I&rsquo;d love to connect and discuss network security, penetration testing, and cybersecurity careers!</p>
+<p>Find me on:</p>
+<ul>
+<li><strong>TryHackMe</strong>: <a href="https://tryhackme.com/p/driscollkile">https://tryhackme.com/p/driscollkile</a></li>
+<li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/kile-driscoll/">Kile-driscoll</a></li>
+<li><strong>GitHub</strong>: <a href="https://github.com/Kile578">Kile578</a></li>
+<li><strong>Blog</strong>: <a href="https://kile578.github.io/">https://kile578.github.io/</a></li>
+</ul>
+<p>Questions or stuck on any part? Feel free to reach out! The cybersecurity community thrives on collaboration and knowledge sharing. We&rsquo;re all learning together on this journey.</p>
+<hr>
+<h2 id="questions-for-further-exploration">Questions for Further Exploration</h2>
+<p><strong>Advanced Service Detection and Evasion:</strong>
+With Task 4, we learned about version detection and how Nmap can fingerprint services and operating systems running on target systems. This raises an interesting question: Are we able to mask our own operating system since it is a quest for many penetration testers to remain undetected?</p>
+<p>Let me know your thoughts on this! How do you think we can effectively mask our OS during reconnaissance?</p>
+<p>Send me LinkedIn or GitHub messages with your ideas!</p>
+<hr>
+<h2 id="final-words">Final Words</h2>
+<p>Remember: always scan ethically and with proper authorization. Network scanning should only be performed on systems you own or have explicit permission to test. Use your knowledge responsibly to improve security, not to cause harm.</p>
+<p>The skills learned in this room form the foundation for advanced network security and penetration testing techniques. Continue practicing in authorized environments, stay curious, and always keep learning.</p>
+<p>Happy scanning, and welcome to the world of network reconnaissance!</p>
+<hr>
+<p><strong>Tags:</strong> #TryHackMe #Nmap #NetworkSecurity #Reconnaissance #PortScanning #HostDiscovery #ServiceDetection #SecurityTesting #EthicalHacking #InfoSec #NetworkRecon #CyberSecurity #PenetrationTesting #SecurityAssessment</p>
+<hr>
+<p><em>This comprehensive guide represents my personal learning journey through TryHackMe&rsquo;s &ldquo;Nmap&rdquo; room. All techniques and methods discussed are for educational purposes and should only be practiced in authorized environments with proper permission.</em></p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  My Cybersecurity Blog 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

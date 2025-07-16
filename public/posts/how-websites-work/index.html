@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>TryHackMe How Websites Work | My Cybersecurity Blog</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="TryHackMe How Websites Work: A Beginner&rsquo;s Journey into Web Security
+Learn web fundamentals and discover security vulnerabilities through hands-on practice
+
+Introduction
+Ever wondered what happens behind the scenes when you visit a website? Or how cybersecurity professionals find vulnerabilities in web applications? I recently completed TryHackMe&rsquo;s &ldquo;How Websites Work&rdquo; room, and I&rsquo;m excited to share my journey from complete beginner to understanding the fundamentals of web security.">
+    <meta name="generator" content="Hugo 0.148.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/posts/how-websites-work/">
+    
+
+    <meta property="og:url" content="http://localhost:1313/posts/how-websites-work/">
+  <meta property="og:site_name" content="My Cybersecurity Blog">
+  <meta property="og:title" content="TryHackMe How Websites Work">
+  <meta property="og:description" content="TryHackMe How Websites Work: A Beginner’s Journey into Web Security Learn web fundamentals and discover security vulnerabilities through hands-on practice
+Introduction Ever wondered what happens behind the scenes when you visit a website? Or how cybersecurity professionals find vulnerabilities in web applications? I recently completed TryHackMe’s “How Websites Work” room, and I’m excited to share my journey from complete beginner to understanding the fundamentals of web security.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-14T17:48:13-07:00">
+    <meta property="article:modified_time" content="2025-07-14T17:48:13-07:00">
+
+  <meta itemprop="name" content="TryHackMe How Websites Work">
+  <meta itemprop="description" content="TryHackMe How Websites Work: A Beginner’s Journey into Web Security Learn web fundamentals and discover security vulnerabilities through hands-on practice
+Introduction Ever wondered what happens behind the scenes when you visit a website? Or how cybersecurity professionals find vulnerabilities in web applications? I recently completed TryHackMe’s “How Websites Work” room, and I’m excited to share my journey from complete beginner to understanding the fundamentals of web security.">
+  <meta itemprop="datePublished" content="2025-07-14T17:48:13-07:00">
+  <meta itemprop="dateModified" content="2025-07-14T17:48:13-07:00">
+  <meta itemprop="wordCount" content="3579">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TryHackMe How Websites Work">
+  <meta name="twitter:description" content="TryHackMe How Websites Work: A Beginner’s Journey into Web Security Learn web fundamentals and discover security vulnerabilities through hands-on practice
+Introduction Ever wondered what happens behind the scenes when you visit a website? Or how cybersecurity professionals find vulnerabilities in web applications? I recently completed TryHackMe’s “How Websites Work” room, and I’m excited to share my journey from complete beginner to understanding the fundamentals of web security.">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        My Cybersecurity Blog
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="Home page">
+              Home
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/projects/" title="Projects page">
+              Projects
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/projects/tryhackme/" title="TryHackMe page">
+              TryHackMe
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/contact/" title="Contact page">
+              Contact
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">TryHackMe How Websites Work</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2025-07-14T17:48:13-07:00">July 14, 2025</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id="tryhackme-how-websites-work-a-beginners-journey-into-web-security">TryHackMe How Websites Work: A Beginner&rsquo;s Journey into Web Security</h1>
+<p><em>Learn web fundamentals and discover security vulnerabilities through hands-on practice</em></p>
+<hr>
+<h2 id="introduction">Introduction</h2>
+<p>Ever wondered what happens behind the scenes when you visit a website? Or how cybersecurity professionals find vulnerabilities in web applications? I recently completed TryHackMe&rsquo;s &ldquo;How Websites Work&rdquo; room, and I&rsquo;m excited to share my journey from complete beginner to understanding the fundamentals of web security.</p>
+<p>This comprehensive guide will walk you through everything I learned about website architecture, HTML structure, JavaScript functionality, and common security vulnerabilities that every web developer and cybersecurity enthusiast should know about.</p>
+<p><strong>What you&rsquo;ll learn from this post:</strong></p>
+<ul>
+<li>How browsers and servers communicate</li>
+<li>HTML fundamentals and structure</li>
+<li>JavaScript basics and security implications</li>
+<li>Real-world security vulnerabilities</li>
+<li>Hands-on techniques for web security testing</li>
+</ul>
+<hr>
+<h2 id="room-information">Room Information</h2>
+<ul>
+<li><strong>Room Name</strong>: How Websites Work</li>
+<li><strong>Difficulty</strong>: Easy (Perfect for beginners!)</li>
+<li><strong>Platform</strong>: TryHackMe</li>
+<li><strong>Room URL</strong>: <a href="https://tryhackme.com/room/howwebsiteswork">https://tryhackme.com/room/howwebsiteswork</a></li>
+<li><strong>Estimated Time</strong>: 2-3 hours</li>
+<li><strong>Skills Required</strong>: Basic computer literacy</li>
+<li><strong>Skills Gained</strong>: Web fundamentals, HTML/JavaScript basics, security awareness</li>
+</ul>
+<hr>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>This room covers essential web security concepts that form the foundation for more advanced cybersecurity topics:</p>
+<ul>
+<li>Understanding how websites function at a technical level</li>
+<li>Learning about web servers and client-side technologies</li>
+<li>Exploring HTML structure and elements</li>
+<li>Understanding JavaScript functionality and interactivity</li>
+<li>Identifying common web application security vulnerabilities</li>
+<li>Developing a security-focused mindset for web technologies</li>
+</ul>
+<hr>
+<h2 id="foundation-knowledge-understanding-websites">Foundation Knowledge: Understanding Websites</h2>
+<h3 id="what-is-a-website">What is a Website?</h3>
+<p>A website is essentially a collection of web pages that users can access through the internet. When you visit a website, your browser (like Safari or Google Chrome) makes a request to a web server asking for information about the page you&rsquo;re visiting. The web server - a dedicated computer somewhere else in the world - responds with data that your browser uses to display the page.</p>
+<h3 id="the-request-response-process">The Request-Response Process</h3>
+<p>Understanding web communication starts with this simple concept: you make a request to a server, and it responds with data your browser uses to render information. While many other processes are involved in this communication, this fundamental request-response cycle powers every website interaction.</p>
+<hr>
+<h2 id="task-1-how-websites-work---the-foundation">Task 1: How Websites Work - The Foundation</h2>
+<h3 id="understanding-web-architecture">Understanding Web Architecture</h3>
+<p>By the end of this room, you&rsquo;ll know how websites are created and be introduced to some basic security issues that affect web applications.</p>
+<h3 id="major-components-of-websites">Major Components of Websites</h3>
+<p>There are two major components that make up every website:</p>
+<p><strong>1. Front End (Client-Side)</strong>
+The frontend is the way your browser renders a website. This includes everything you see and interact with - the visual elements, buttons, text, images, and forms that make up the user interface.</p>
+<p><strong>2. Back End (Server-Side)</strong>
+The backend is a server that processes your request and returns a response. This handles all the behind-the-scenes functionality like database operations, user authentication, and business logic.</p>
+<h3 id="the-communication-process">The Communication Process</h3>
+<p>When you visit a website:</p>
+<ol>
+<li>Your browser makes a request to a web server</li>
+<li>The server processes your request</li>
+<li>The server responds with data</li>
+<li>Your browser uses this data to render the webpage</li>
+</ol>
+<h3 id="task-challenge">Task Challenge</h3>
+<p><strong>Question</strong>: What term best describes the component of a web application rendered by your browser?</p>
+<p><strong>Answer</strong>: <strong>Front End</strong> (or <strong>Client-Side</strong>)</p>
+<p><strong>Explanation</strong>: The front end is the component that your browser renders and displays to you as the user interface.</p>
+<p><strong>Key Insight</strong>: Understanding the distinction between frontend and backend is crucial for web security, as vulnerabilities can exist in both layers and require different approaches to identify and prevent.</p>
+<hr>
+<h2 id="task-2-html---the-language-of-the-web">Task 2: HTML - The Language of the Web</h2>
+<h3 id="understanding-html-fundamentals">Understanding HTML Fundamentals</h3>
+<p>Websites are primarily created using three core technologies:</p>
+<ul>
+<li><strong>HTML</strong>: To build websites and define their structure</li>
+<li><strong>CSS</strong>: To make websites look attractive by adding styling options</li>
+<li><strong>JavaScript</strong>: To implement complex features and interactivity</li>
+</ul>
+<p><strong>H</strong>yper<strong>T</strong>ext <strong>M</strong>arkup <strong>L</strong>anguage (HTML) is the language websites are written in. Elements (also known as tags) are the building blocks of HTML pages and tell the browser how to display content.</p>
+<h3 id="html-structure-and-components">HTML Structure and Components</h3>
+<p>Every HTML document follows the same basic structure:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span>&gt;
+</span></span><span style="display:flex;"><span>   &lt;<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>       &lt;<span style="color:#f92672">title</span>&gt;Page Title&lt;/<span style="color:#f92672">title</span>&gt;
+</span></span><span style="display:flex;"><span>   &lt;/<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>   &lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>       &lt;<span style="color:#f92672">h1</span>&gt;Example Heading&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>       &lt;<span style="color:#f92672">p</span>&gt;Example paragraph&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>   &lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><h3 id="html-structure-breakdown">HTML Structure Breakdown</h3>
+<p><strong>Essential HTML Components:</strong></p>
+<ul>
+<li><strong><code>&lt;!DOCTYPE html&gt;</code></strong>: Defines that the page is an HTML5 document, helping with standardization across different browsers</li>
+<li><strong><code>&lt;html&gt;</code></strong>: The root element of the HTML page - all other elements come after this element</li>
+<li><strong><code>&lt;head&gt;</code></strong>: Contains information about the page (such as the page title)</li>
+<li><strong><code>&lt;body&gt;</code></strong>: Defines the HTML document&rsquo;s body; only content inside the body is shown in the browser</li>
+<li><strong><code>&lt;h1&gt;</code></strong>: Defines a large heading</li>
+<li><strong><code>&lt;p&gt;</code></strong>: Defines a paragraph</li>
+</ul>
+<h3 id="html-elements-and-attributes">HTML Elements and Attributes</h3>
+<p>HTML offers many different elements for various purposes:</p>
+<ul>
+<li><strong>Buttons</strong>: <code>&lt;button&gt;</code></li>
+<li><strong>Images</strong>: <code>&lt;img&gt;</code></li>
+<li><strong>Lists</strong>: <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code></li>
+<li><strong>Links</strong>: <code>&lt;a&gt;</code></li>
+</ul>
+<h3 id="working-with-attributes">Working with Attributes</h3>
+<p>Tags can contain attributes that provide additional functionality:</p>
+<p><strong>Class Attribute:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bold-text&#34;</span>&gt;This text can be styled&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span></code></pre></div><p><strong>Source Attribute for Images:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;img/cat.jpg&#34;</span>&gt;
+</span></span></code></pre></div><p><strong>Multiple Attributes:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">attribute1</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;value1&#34;</span> <span style="color:#a6e22e">attribute2</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;value2&#34;</span>&gt;Content&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span></code></pre></div><p><strong>ID Attribute:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;example&#34;</span>&gt;Unique element&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span></code></pre></div><p><strong>Important Note</strong>: Unlike class attributes (where multiple elements can use the same class), each element must have a unique ID to identify it specifically. IDs are used for styling and JavaScript targeting.</p>
+<h3 id="viewing-html-source-code">Viewing HTML Source Code</h3>
+<p>You can view the HTML of any website by:</p>
+<ul>
+<li><strong>Chrome</strong>: Right-clicking and selecting &ldquo;View Page Source&rdquo;</li>
+<li><strong>Safari</strong>: Right-clicking and selecting &ldquo;Show Page Source&rdquo;</li>
+</ul>
+<h3 id="task-challenges">Task Challenges</h3>
+<p><strong>Challenge 1: Basic HTML Rendering</strong>
+<em>Task</em>: Click the &ldquo;View Site&rdquo; button and experiment with the HTML renderer</p>
+<p><em>Solution</em>: Use the HTML box to enter code and click &ldquo;Render HTML Code&rdquo; to see results</p>
+<p><strong>Challenge 2: Fixing Broken Images</strong>
+<em>Question</em>: One of the images on the cat website is broken - fix it, and the image will reveal the hidden text answer!</p>
+<p><em>Problem</em>: The broken image was missing the proper file extension
+<em>Solution</em>: Add the correct file extension to complete the image path</p>
+<p><em>Answer Revealed</em>: <em><strong>HTMLHERO</strong></em></p>
+<p><strong>Challenge 3: Adding New Elements</strong>
+<em>Task</em>: Add a dog image to the page by adding another img tag on line 11. The dog image location is img/dog-1.png. What is the text in the dog image?</p>
+<p><em>Solution</em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;img/dog-1.png&#34;</span>&gt;
+</span></span></code></pre></div><p><em>Answer</em>: [Text visible in the dog image after adding the element]</p>
+<h3 id="html-security-implications">HTML Security Implications</h3>
+<p>Understanding HTML is crucial for web security because:</p>
+<ul>
+<li>HTML comments can contain sensitive information</li>
+<li>Improperly structured HTML can lead to injection vulnerabilities</li>
+<li>Client-side code is always visible to users</li>
+<li>All HTML elements and attributes are accessible through browser developer tools</li>
+</ul>
+<hr>
+<h2 id="task-3-javascript---bringing-websites-to-life">Task 3: JavaScript - Bringing Websites to Life</h2>
+<h3 id="understanding-javascripts-role">Understanding JavaScript&rsquo;s Role</h3>
+<p>JavaScript (JS) is one of the most popular coding languages in the world and allows pages to become interactive. While HTML creates the website structure and content, JavaScript controls the functionality of web pages.</p>
+<h3 id="static-vs-dynamic-content">Static vs. Dynamic Content</h3>
+<p><strong>Without JavaScript</strong>: Pages would not have interactive elements and would always be static
+<strong>With JavaScript</strong>: Pages can:</p>
+<ul>
+<li>Dynamically update content in real-time</li>
+<li>Respond to user interactions (clicks, hovers, form submissions)</li>
+<li>Change styling based on events</li>
+<li>Display moving animations</li>
+<li>Provide complex functionality</li>
+</ul>
+<h3 id="adding-javascript-to-web-pages">Adding JavaScript to Web Pages</h3>
+<p>JavaScript can be included in web pages in two primary ways:</p>
+<p><strong>Inline JavaScript (within script tags):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>   document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;demo&#34;</span>).<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hack the Planet&#34;</span>;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><p><strong>External JavaScript Files:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/location/of/javascript_file.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><h3 id="practical-javascript-examples">Practical JavaScript Examples</h3>
+<p><strong>Basic DOM Manipulation:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;demo&#34;</span>).<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hack the Planet&#34;</span>;
+</span></span></code></pre></div><p>This code:</p>
+<ol>
+<li>Finds an HTML element with the ID &ldquo;demo&rdquo;</li>
+<li>Changes the element&rsquo;s content to &ldquo;Hack the Planet&rdquo;</li>
+</ol>
+<p><strong>Interactive Button with Events:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;document.getElementById(&#34;demo&#34;).innerHTML = &#34;Button Clicked&#34;;&#39;</span>&gt;Click Me!&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span></code></pre></div><p>This creates a button that, when clicked, changes the content of the &ldquo;demo&rdquo; element to &ldquo;Button Clicked&rdquo;.</p>
+<h3 id="javascript-events">JavaScript Events</h3>
+<p>HTML elements can have events such as:</p>
+<ul>
+<li><strong>onclick</strong>: Executes when the element is clicked</li>
+<li><strong>onhover</strong>: Executes when the mouse hovers over the element</li>
+<li><strong>onload</strong>: Executes when the page loads</li>
+<li><strong>onsubmit</strong>: Executes when a form is submitted</li>
+</ul>
+<p><strong>Important Note</strong>: onclick events can be defined either directly on elements (as shown above) or inside JavaScript script tags.</p>
+<h3 id="task-challenges-1">Task Challenges</h3>
+<p><strong>Challenge 1: Content Modification</strong>
+<em>Question</em>: Click the &ldquo;View Site&rdquo; button on this task. On the right-hand side, add JavaScript that changes the demo element&rsquo;s content to &ldquo;Hack the Planet&rdquo;</p>
+<p><em>Solution</em>: Add the JavaScript code to change the element content</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;demo&#34;</span>).<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hack the Planet&#34;</span>;
+</span></span></code></pre></div><p><em>Answer Revealed</em>: <em><strong>JSISFUN</strong></em></p>
+<p><strong>Challenge 2: Interactive Button</strong>
+<em>Task</em>: Add the button HTML from this task that changes the element&rsquo;s text to &ldquo;Button Clicked&rdquo; on the editor on the right, update the code by clicking the &ldquo;Render HTML+JS Code&rdquo; button and then click the button.</p>
+<p><em>Solution</em>: Implement the onclick event handler:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;document.getElementById(&#34;demo&#34;).innerHTML = &#34;Button Clicked&#34;;&#39;</span>&gt;Click Me!&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span></code></pre></div><h3 id="javascript-security-implications">JavaScript Security Implications</h3>
+<p>Understanding JavaScript is crucial for web security because:</p>
+<ul>
+<li><strong>Client-side execution</strong>: JavaScript runs in the user&rsquo;s browser, making it accessible and modifiable</li>
+<li><strong>DOM manipulation</strong>: JavaScript can alter page content and behavior dynamically</li>
+<li><strong>Event-driven programming</strong>: User interactions can trigger code execution</li>
+<li><strong>Input handling</strong>: JavaScript often processes user input, creating potential injection points</li>
+<li><strong>Third-party scripts</strong>: External JavaScript files can introduce vulnerabilities</li>
+</ul>
+<hr>
+<h2 id="task-4-sensitive-data-exposure---a-critical-security-flaw">Task 4: Sensitive Data Exposure - A Critical Security Flaw</h2>
+<h3 id="understanding-the-vulnerability">Understanding the Vulnerability</h3>
+<p>Sensitive Data Exposure occurs when a website doesn&rsquo;t properly protect (or remove) sensitive clear-text information from the end-user. This vulnerability is usually found in a site&rsquo;s frontend source code and represents one of the most common security mistakes in web development.</p>
+<h3 id="how-sensitive-data-gets-exposed">How Sensitive Data Gets Exposed</h3>
+<p>Since websites are built using HTML elements (tags), all of which we can see by &ldquo;viewing the page source,&rdquo; developers may accidentally leave behind:</p>
+<ul>
+<li>Login credentials</li>
+<li>Hidden links to private parts of the website</li>
+<li>API keys and tokens</li>
+<li>Internal comments with sensitive information</li>
+<li>Database connection strings</li>
+<li>Other sensitive data in HTML or JavaScript</li>
+</ul>
+<h3 id="the-investigation-process">The Investigation Process</h3>
+<p>When assessing a web application for security issues, one of the first things you should do is review the page source code to look for:</p>
+<ul>
+<li>Exposed login credentials</li>
+<li>Hidden links</li>
+<li>Comments containing sensitive information</li>
+<li>Hardcoded API keys</li>
+<li>Internal URLs and endpoints</li>
+</ul>
+<h3 id="potential-impact">Potential Impact</h3>
+<p>Sensitive information can be leveraged to:</p>
+<ul>
+<li>Gain unauthorized access to other parts of the application</li>
+<li>Access backend components of the site</li>
+<li>Escalate privileges within the system</li>
+<li>Discover hidden functionality</li>
+<li>Compromise user accounts</li>
+</ul>
+<h3 id="task-challenge-1">Task Challenge</h3>
+<p><strong>Question</strong>: View the website on this link. What is the password hidden in the source code?</p>
+<p><strong>Investigation Process</strong>:</p>
+<ol>
+<li>Navigate to the target website</li>
+<li>Right-click and select &ldquo;View Page Source&rdquo;</li>
+<li>Search through the HTML source code</li>
+<li>Look for comments, hidden fields, or JavaScript variables</li>
+<li>Search for common keywords like &ldquo;password&rdquo;, &ldquo;admin&rdquo;, &ldquo;login&rdquo;</li>
+</ol>
+<p><strong>Answer</strong>: <em><strong>testpasswd</strong></em></p>
+<p><strong>Real-World Security Implications</strong>:</p>
+<ul>
+<li>Anyone can view client-side source code</li>
+<li>This type of exposure is surprisingly common in real applications</li>
+<li>Automated tools can scan for exposed credentials across entire websites</li>
+<li>Such vulnerabilities can lead to complete system compromise</li>
+</ul>
+<h3 id="prevention-strategies">Prevention Strategies</h3>
+<ul>
+<li><strong>Never store sensitive data in client-side code</strong></li>
+<li><strong>Use environment variables for configuration</strong></li>
+<li><strong>Implement proper authentication systems</strong></li>
+<li><strong>Regular security code reviews</strong></li>
+<li><strong>Automated scanning for exposed secrets</strong></li>
+<li><strong>Remove all debug information from production</strong></li>
+</ul>
+<hr>
+<h2 id="task-5-html-injection---understanding-client-side-attacks">Task 5: HTML Injection - Understanding Client-Side Attacks</h2>
+<h3 id="what-is-html-injection">What is HTML Injection?</h3>
+<p>HTML Injection is a vulnerability that occurs when unfiltered user input is displayed on the page. If a website fails to sanitize user input (filter any &ldquo;malicious&rdquo; text that a user inputs into a website), and that input is used on the page, an attacker can inject HTML code into a vulnerable website.</p>
+<h3 id="the-importance-of-input-sanitization">The Importance of Input Sanitization</h3>
+<p>Input sanitization is very important in keeping a website secure because:</p>
+<ul>
+<li>Information a user inputs is often used in other frontend and backend functionality</li>
+<li>Unsanitized input can lead to various injection attacks</li>
+<li>User input should never be trusted without proper validation</li>
+<li>This vulnerability affects client-side functionality directly</li>
+</ul>
+<h3 id="how-html-injection-works">How HTML Injection Works</h3>
+<p>When a user has control of how their input is displayed, they can:</p>
+<ol>
+<li>Submit HTML (or JavaScript) code in input fields</li>
+<li>The browser processes this code as legitimate HTML</li>
+<li>The injected code becomes part of the page</li>
+<li>The attacker gains control over page appearance and functionality</li>
+</ol>
+<h3 id="technical-example">Technical Example</h3>
+<p>Consider a form that outputs text to the page. If user input from a &ldquo;What&rsquo;s your name&rdquo; field is passed directly to a JavaScript function without sanitization:</p>
+<p><strong>Vulnerable Code Pattern</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">displayName</span>(<span style="color:#a6e22e">name</span>) {
+</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;output&#34;</span>).<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">name</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>If a user enters</strong>: <code>&lt;h1&gt;Hacked!&lt;/h1&gt;</code>
+<strong>The output becomes</strong>: <code>Hello &lt;h1&gt;Hacked!&lt;/h1&gt;</code></p>
+<p>The browser renders this as actual HTML, displaying &ldquo;Hacked!&rdquo; as a large heading instead of plain text.</p>
+<h3 id="practical-exploitation">Practical Exploitation</h3>
+<p><strong>Objective</strong>: Inject HTML to display a malicious link to <a href="http://hacker.com">http://hacker.com</a></p>
+<p><strong>Solution</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://hacker.com&#34;</span>&gt;Click here for free stuff!&lt;/<span style="color:#f92672">a</span>&gt;
+</span></span></code></pre></div><p><strong>How it works</strong>:</p>
+<ul>
+<li><code>&lt;a href=&quot;http://hacker.com&quot;&gt;</code> creates a clickable link to the malicious site</li>
+<li><code>Click here for free stuff!</code> provides enticing text to trick users</li>
+<li><code>&lt;/a&gt;</code> properly closes the HTML anchor tag</li>
+</ul>
+<h3 id="advanced-payload-examples">Advanced Payload Examples</h3>
+<p><strong>Basic malicious link</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://hacker.com&#34;</span>&gt;Click here for free stuff!&lt;/<span style="color:#f92672">a</span>&gt;
+</span></span></code></pre></div><p><strong>Opens in new tab to avoid suspicion</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://hacker.com&#34;</span> <span style="color:#a6e22e">target</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_blank&#34;</span>&gt;Important Update&lt;/<span style="color:#f92672">a</span>&gt;
+</span></span></code></pre></div><p><strong>Styled to look official</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://hacker.com&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;color: red; font-weight: bold;&#34;</span>&gt;Security Alert - Click Here&lt;/<span style="color:#f92672">a</span>&gt;
+</span></span></code></pre></div><h3 id="task-challenge-2">Task Challenge</h3>
+<p><strong>Question</strong>: View the website on this task and inject HTML so that a malicious link to <a href="http://hacker.com">http://hacker.com</a> is shown.</p>
+<p><strong>Solution</strong>: Enter the HTML injection payload in the vulnerable input field:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://hacker.com&#34;</span>&gt;Click here for free stuff!&lt;/<span style="color:#f92672">a</span>&gt;
+</span></span></code></pre></div><p><strong>Answer Revealed</strong>: <em><strong>HTML_INJ3CTI0N</strong></em></p>
+<h3 id="the-general-security-rule">The General Security Rule</h3>
+<p><strong>Never trust user input.</strong> To prevent malicious input, website developers should sanitize everything the user enters before using it in any function. In the case of HTML injection, developers should remove or encode HTML tags to prevent them from being interpreted as code.</p>
+<h3 id="prevention-strategies-1">Prevention Strategies</h3>
+<ul>
+<li><strong>Input Sanitization</strong>: Filter and validate all user input before processing</li>
+<li><strong>Output Encoding</strong>: Encode special characters before displaying user input</li>
+<li><strong>Content Security Policy (CSP)</strong>: Implement CSP headers to restrict inline script execution</li>
+<li><strong>Regular Security Testing</strong>: Conduct automated and manual vulnerability assessments</li>
+<li><strong>Input Validation</strong>: Implement both client-side and server-side validation</li>
+<li><strong>Principle of Least Privilege</strong>: Limit what user input can affect on the page</li>
+</ul>
+<h3 id="real-world-security-implications">Real-World Security Implications</h3>
+<p>HTML injection can lead to:</p>
+<ul>
+<li><strong>Phishing attacks</strong>: Malicious links that appear legitimate</li>
+<li><strong>Content modification</strong>: Changing page content to mislead users</li>
+<li><strong>Social engineering</strong>: Using injected content to trick users</li>
+<li><strong>XSS preparation</strong>: HTML injection can be a stepping stone to Cross-Site Scripting</li>
+<li><strong>User trust compromise</strong>: Users may lose confidence in the website&rsquo;s security</li>
+</ul>
+<hr>
+<h2 id="key-takeaways-and-lessons-learned">Key Takeaways and Lessons Learned</h2>
+<h3 id="technical-skills-developed">Technical Skills Developed</h3>
+<p><strong>Web Architecture Understanding:</strong></p>
+<ul>
+<li>Mastered the client-server communication model</li>
+<li>Learned the distinction between frontend and backend systems</li>
+<li>Understood how browsers process and render web content</li>
+</ul>
+<p><strong>HTML and JavaScript Proficiency:</strong></p>
+<ul>
+<li>Gained hands-on experience with HTML structure and syntax</li>
+<li>Learned JavaScript DOM manipulation and event handling</li>
+<li>Developed debugging skills using browser developer tools</li>
+<li>Understanding of how HTML elements and attributes work together</li>
+</ul>
+<p><strong>Security Awareness:</strong></p>
+<ul>
+<li>Identified common vulnerability patterns in web applications</li>
+<li>Learned systematic approaches to security testing</li>
+<li>Understood the real-world impact of coding mistakes</li>
+<li>Developed skills in source code analysis</li>
+</ul>
+<h3 id="security-mindset-development">Security Mindset Development</h3>
+<p><strong>Always Assume User Input is Malicious:</strong>
+This room reinforced the fundamental security principle that user input should never be trusted without proper validation and sanitization.</p>
+<p><strong>Client-Side Code is Public:</strong>
+Everything sent to the browser is accessible to users, making it crucial to never include sensitive information in client-side code.</p>
+<p><strong>Small Mistakes Have Big Consequences:</strong>
+Simple oversights like missing input validation or exposed credentials can lead to complete system compromise.</p>
+<p><strong>Security is Everyone&rsquo;s Responsibility:</strong>
+Even simple websites can have serious vulnerabilities, making security awareness important for all web developers.</p>
+<h3 id="real-world-applications">Real-World Applications</h3>
+<p><strong>For Web Developers:</strong></p>
+<ul>
+<li>Implement proper input validation and output encoding</li>
+<li>Use secure coding practices from the beginning</li>
+<li>Regular security testing should be part of the development process</li>
+<li>Never store sensitive information in client-side code</li>
+</ul>
+<p><strong>For Security Professionals:</strong></p>
+<ul>
+<li>Understand common vulnerability patterns</li>
+<li>Develop systematic testing methodologies</li>
+<li>Learn to think like both attacker and defender</li>
+<li>Master source code analysis techniques</li>
+</ul>
+<p><strong>For General Users:</strong></p>
+<ul>
+<li>Be cautious of suspicious links and forms</li>
+<li>Understand that not all websites implement proper security</li>
+<li>Develop awareness of common attack techniques</li>
+<li>Know how to inspect page source for learning purposes</li>
+</ul>
+<hr>
+<h2 id="tools-and-resources-for-continued-learning">Tools and Resources for Continued Learning</h2>
+<h3 id="essential-browser-tools">Essential Browser Tools</h3>
+<p><strong>Developer Tools (F12):</strong></p>
+<ul>
+<li><strong>Elements Tab</strong>: Inspect and modify HTML structure</li>
+<li><strong>Console Tab</strong>: Test JavaScript and view error messages</li>
+<li><strong>Network Tab</strong>: Monitor HTTP requests and responses</li>
+<li><strong>Security Tab</strong>: Check SSL certificates and connection security</li>
+<li><strong>Sources Tab</strong>: View and debug JavaScript code</li>
+</ul>
+<h3 id="recommended-learning-resources">Recommended Learning Resources</h3>
+<p><strong>TryHackMe Rooms:</strong></p>
+<ul>
+<li>OWASP Top 10 - Learn about the most critical web application security risks</li>
+<li>Web Fundamentals - Deeper dive into web technologies</li>
+<li>Burp Suite Basics - Learn professional web application testing tools</li>
+</ul>
+<p><strong>External Resources:</strong></p>
+<ul>
+<li>MDN Web Docs - Comprehensive HTML, CSS, and JavaScript documentation</li>
+<li>OWASP Foundation - Web application security guidelines and best practices</li>
+<li>PortSwigger Web Security Academy - Free online web security training</li>
+</ul>
+<hr>
+<h2 id="common-challenges-and-how-to-overcome-them">Common Challenges and How to Overcome Them</h2>
+<h3 id="challenge-1-information-overload">Challenge 1: Information Overload</h3>
+<p><strong>Problem</strong>: Too many new concepts at once
+<strong>Solution:</strong></p>
+<ul>
+<li>Take breaks between tasks to process information</li>
+<li>Create personal notes and summaries</li>
+<li>Practice concepts multiple times in different contexts</li>
+<li>Focus on understanding one concept thoroughly before moving to the next</li>
+</ul>
+<h3 id="challenge-2-technical-terminology">Challenge 2: Technical Terminology</h3>
+<p><strong>Problem</strong>: Unfamiliar security and web development terms
+<strong>Solution:</strong></p>
+<ul>
+<li>Maintain a personal glossary of terms</li>
+<li>Research concepts thoroughly using multiple sources</li>
+<li>Join cybersecurity communities for discussion and clarification</li>
+<li>Use browser developer tools to see concepts in action</li>
+</ul>
+<h3 id="challenge-3-connecting-theory-to-practice">Challenge 3: Connecting Theory to Practice</h3>
+<p><strong>Problem</strong>: Understanding concepts but struggling with real-world application
+<strong>Solution:</strong></p>
+<ul>
+<li>Practice on safe, legal testing environments</li>
+<li>Build simple websites to experiment with concepts</li>
+<li>Use browser developer tools on legitimate websites (for learning only)</li>
+<li>Join beginner-friendly cybersecurity communities</li>
+</ul>
+<h3 id="challenge-4-source-code-analysis">Challenge 4: Source Code Analysis</h3>
+<p><strong>Problem</strong>: Difficulty finding information in HTML source code
+<strong>Solution:</strong></p>
+<ul>
+<li>Use browser search function (Ctrl+F) to find keywords</li>
+<li>Learn to read HTML structure systematically</li>
+<li>Practice on different websites to build pattern recognition</li>
+<li>Use developer tools &ldquo;Elements&rdquo; tab for easier navigation</li>
+</ul>
+<hr>
+<h2 id="conclusion">Conclusion</h2>
+<p>Completing TryHackMe&rsquo;s &ldquo;How Websites Work&rdquo; room provided an excellent foundation for understanding web security fundamentals. This beginner-friendly introduction successfully bridges the gap between basic computer literacy and cybersecurity expertise.</p>
+<h3 id="most-valuable-insights">Most Valuable Insights:</h3>
+<p><strong>Security is Everyone&rsquo;s Responsibility</strong>: Even simple websites can have serious vulnerabilities, making security awareness crucial for developers, security professionals, and users alike.</p>
+<p><strong>Fundamentals Matter</strong>: Understanding basic web technologies (HTML, JavaScript, client-server communication) is crucial for advanced security work.</p>
+<p><strong>Hands-on Practice is Essential</strong>: Reading about security concepts is different from actually finding and exploiting vulnerabilities in a controlled environment.</p>
+<p><strong>User Input is Never Trustworthy</strong>: The importance of input validation and sanitization cannot be overstated in web security.</p>
+<h3 id="impact-on-my-cybersecurity-journey">Impact on My Cybersecurity Journey:</h3>
+<p>This room transformed my understanding of how websites work and opened my eyes to the constant security challenges faced by web developers and security professionals. The hands-on approach made abstract concepts concrete and actionable, providing a solid foundation for more advanced web security topics.</p>
+<h3 id="for-fellow-learners">For Fellow Learners:</h3>
+<p>Whether you&rsquo;re a complete beginner in cybersecurity, a web developer wanting to understand security better, or anyone curious about how the internet works, this room provides invaluable insights that will change how you think about websites forever.</p>
+<p>The journey into cybersecurity starts with understanding the basics, and &ldquo;How Websites Work&rdquo; provides exactly that foundation. Every expert was once a beginner, and rooms like this make that journey accessible to everyone.</p>
+<hr>
+<h2 id="connect-with-me">Connect with Me</h2>
+<p>Found this writeup helpful? I&rsquo;d love to connect and discuss cybersecurity, web development, and continuous learning!</p>
+<p>Find me on:</p>
+<ul>
+<li><strong>TryHackMe</strong>: <a href="https://tryhackme.com/p/driscollkile">https://tryhackme.com/p/driscollkile</a></li>
+<li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/kile-driscoll/">Kile-driscoll</a></li>
+<li><strong>GitHub</strong>: <a href="https://github.com/Kile578">Kile578</a></li>
+<li><strong>Blog</strong>: <a href="https://kile578.github.io/">https://kile578.github.io/</a></li>
+</ul>
+<p>Questions or stuck on any part? Feel free to reach out! The cybersecurity community thrives on collaboration and knowledge sharing. We&rsquo;re all learning together on this journey.</p>
+<hr>
+<h2 id="questions-for-further-exploration">Questions for Further Exploration</h2>
+<p><strong>Advanced Web Security Concepts:</strong></p>
+<p>With the fundamentals of HTML, JavaScript, and common vulnerabilities covered, several advanced questions emerge for further exploration:</p>
+<p><strong>Consider these questions:</strong></p>
+<ol>
+<li>
+<p><strong>Input Validation vs. Output Encoding</strong>: We learned about HTML injection and the importance of input sanitization. What&rsquo;s the difference between input validation and output encoding, and when should each be used?</p>
+</li>
+<li>
+<p><strong>Client-Side vs. Server-Side Security</strong>: Since we discovered that client-side code is always visible, how do we balance functionality with security? What security measures should be implemented on the server-side?</p>
+</li>
+<li>
+<p><strong>Modern Web Security Headers</strong>: What are Content Security Policy (CSP) headers, and how do they help prevent the types of attacks we explored in this room?</p>
+</li>
+<li>
+<p><strong>Progressive Security Learning</strong>: This room covered basic vulnerabilities, but how do these relate to more advanced attacks like Cross-Site Scripting (XSS), SQL Injection, and Cross-Site Request Forgery (CSRF)?</p>
+</li>
+<li>
+<p><strong>Defensive Development</strong>: As a developer, how can you implement security-by-design principles from the beginning of a project rather than adding security as an afterthought?</p>
+</li>
+</ol>
+<p><strong>Research Challenge:</strong></p>
+<p>Explore the OWASP Top 10 list and identify how the vulnerabilities we learned about in this room relate to the most critical web application security risks. How do Sensitive Data Exposure and HTML Injection fit into the broader web security landscape?</p>
+<p><strong>Discussion Points:</strong></p>
+<ul>
+<li>What are the legal and ethical implications of testing for these vulnerabilities on websites you don&rsquo;t own?</li>
+<li>How do modern web frameworks help prevent the basic vulnerabilities we explored?</li>
+<li>What role does security awareness training play in preventing these common mistakes?</li>
+<li>How has web security evolved with the rise of single-page applications and modern JavaScript frameworks?</li>
+</ul>
+<p>These questions bridge the gap between learning basic web concepts and understanding the advanced security methodologies that make cybersecurity a constantly evolving field. They prepare you for deeper exploration into web application security testing and secure development practices.</p>
+<hr>
+<h2 id="final-words">Final Words</h2>
+<p>Remember: always practice ethically and with proper permission. The skills learned here should be used to improve security, not to cause harm. Use your knowledge responsibly to make the internet a safer place for everyone.</p>
+<p>The concepts covered in this room form the foundation for advanced web security topics. Continue practicing in authorized environments, stay curious, and always keep learning. The web security field is constantly evolving, and understanding these fundamentals will serve you well as you advance in your cybersecurity journey.</p>
+<p>Happy learning, and welcome to the world of web security!</p>
+<hr>
+<p><strong>Tags:</strong> #TryHackMe #WebSecurity #Cybersecurity #BeginnerFriendly #HTML #JavaScript #SecurityTesting #EthicalHacking #WebDevelopment #InfoSec #VulnerabilityAssessment #SecurityAwareness #WebApplicationSecurity #HTMLInjection #SensitiveDataExposure</p>
+<hr>
+<p><em>This comprehensive guide represents my personal learning journey through TryHackMe&rsquo;s &ldquo;How Websites Work&rdquo; room. All techniques and vulnerabilities discussed are for educational purposes and should only be practiced in authorized environments.</em></p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  My Cybersecurity Blog 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
